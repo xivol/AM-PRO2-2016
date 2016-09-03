@@ -1,0 +1,23 @@
+//
+// Лабораторная работа №2. Деревья
+// main.cpp
+//
+#include <iostream>
+#include "tree.h"
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    tree *root = get_tree(10);
+    print_tree(root);
+    cout << leaves_count(root) << endl;
+    delete_tree(root);
+
+    _CrtDumpMemoryLeaks();
+
+    system("pause");
+    return 0;
+}
