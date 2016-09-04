@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №2. Деревья
+// test_tree.cpp
+//
 #include <cassert>
 #include <iostream>
 #include "crtdynmem.h"
@@ -43,14 +47,7 @@ bool test_array_tree_rec(const tree::datatype *array, const size_t length, const
     if (root->data == array[index]) {
         size_t right = 2 * index + 1;
         size_t left = 2 * index + 2;
-        if (right < length && root->right == nullptr)
-            return true;
-        else
-            return test_array_tree_rec(array, length, right, root->right);
-        if (left < length && root->left == nullptr)
-            return true;
-        else
-            return test_array_tree_rec(array, length, left, root->left);
+        return test_array_tree_rec(array, length, right, root->right) && test_array_tree_rec(array, length, left, root->left);
     }
     return false;
 }
