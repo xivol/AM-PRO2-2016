@@ -122,10 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crtdynmem.h" />
+    <ClInclude Include="test_tree.h" />
     <ClInclude Include="tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_tree.cpp" />
     <ClCompile Include="tree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
