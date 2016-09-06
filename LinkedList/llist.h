@@ -58,3 +58,5 @@ void print_list(const List *begin)
     }
     cout << endl;
 }
+
+void sort(llist *&begin, llist *&end);
