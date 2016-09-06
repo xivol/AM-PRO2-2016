@@ -14,7 +14,7 @@ int main()
     test_get_array_tree();
     tree *root = get_tree(10);
     print_tree(root);
-    cout << leaves_count(root) << endl;
+    cout << "Количество листьев: " << leaves_count(root) << endl;
     delete_tree(root);
 
     _CrtDumpMemoryLeaks();

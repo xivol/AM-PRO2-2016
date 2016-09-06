@@ -43,11 +43,9 @@ bool test_get_array_tree()
 
 bool test_array_tree_rec(const tree::datatype *array, const size_t length, const size_t index, const tree *root)
 {
-    if (root == nullptr && index >= length) return true;
-    if (root->data == array[index]) {
-        size_t right = 2 * index + 1;
-        size_t left = 2 * index + 2;
-        return test_array_tree_rec(array, length, right, root->right) && test_array_tree_rec(array, length, left, root->left);
-    }
-    return false;
+    if (root == nullptr) return index >= length;
+    if (root->data != array[index]) return false;
+    size_t right = 2 * index + 1;
+    size_t left = 2 * index + 2;
+    return test_array_tree_rec(array, length, right, root->right) && test_array_tree_rec(array, length, left, root->left);
 }
