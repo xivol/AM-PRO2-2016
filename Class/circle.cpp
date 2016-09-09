@@ -1,4 +1,5 @@
 #include "circle.h"
+#include <cassert>
 #include <cmath>
 #include <cfloat>
 #include <iostream>
@@ -31,7 +32,7 @@ double circle::perimeter() const
 
 bool circle::contains(const point & p) const
 {
-    return abs(p.distance_to(c)-r)<precision;
+    return p.distance_to(c) <= r;
 }
 
 circle get_circle()
@@ -61,8 +62,9 @@ circle min_circuncircle(const point * points, const size_t length)
             bool circum = true;
             for (int k = 0; k < length; ++k)
                 if (!c.contains(points[k])) {
+                    print(points[k]);
                     circum = false;
-                    break
+                    break;
                 }
             if (circum) {
                 if (c.area() < min_circle.area())

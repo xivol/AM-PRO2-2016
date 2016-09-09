@@ -39,7 +39,7 @@ int main()
             cin >> n;
             point* points = new point[n];
             for (int i = 0; i < n; ++i)
-                p[i] = get_point();
+                points[i] = get_point();
             print(min_circuncircle(points, n));
             delete [] points;
         }

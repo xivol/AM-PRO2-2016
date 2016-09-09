@@ -7,24 +7,24 @@ using namespace std;
 
 point::point(): x(0.0), y(0.0) 
 {
-    cout << "Создана точка (0,0)" << endl;
+    //cout << "Создана точка (0,0)" << endl;
 }
 
 point::point(double x, double y)
 {
     this->x = x;
     this->y = y;
-    cout << "Создана точка ( " << x << " , " << y << " )" << endl;
+    //cout << "Создана точка ( " << x << " , " << y << " )" << endl;
 }
 
 point::point(const point &p): x(p.x), y(p.y) 
 {
-    cout << "Создана копия ( " << x << " , " << y << " )" << endl;
+    //cout << "Создана копия ( " << x << " , " << y << " )" << endl;
 }
 
 point::~point()
 {
-    cout << "Уничтожена точка ( " << x << " , " << y << " )" << endl;
+    //cout << "Уничтожена точка ( " << x << " , " << y << " )" << endl;
 }
 
 double point::distance_to(const point &target) const
