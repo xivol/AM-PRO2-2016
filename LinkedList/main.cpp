@@ -17,9 +17,6 @@ int main()
     llist *end;
     llist *begin = get_list(filename, end);
     print_list(begin);
-    sort(begin, end);
-    cout << endl;
-    print_list(begin);
 
     cout << (is_symmetrical(begin, end) ? "Список симметричен" : "Список не симметричен") << endl;
     delete_list(begin);
