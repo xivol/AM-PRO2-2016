@@ -1,29 +1,52 @@
 #pragma once
 
+// Точки будут содержать вещественные координаты,
+// значит нам необходимо установить точность вычислений.
 const double precision = 1E-10;
 
+// Предварительное объявление класса сообщает,
+// что класс находится в одной сборке с текущим файлом.
 class test_point;
 
 class point
 {
 private:
     double x, y;
-public:
-    point();
+public:    
+    // Конструктор с параметрами.
     point(double x, double y);
-    point(const point &p);
-    ~point();
-    
+    // Конструктор по умолчанию.
+    point();
+
+    // методы доступа к закрытым полям
     double get_x() const;
     double get_y() const;
 
-    double distance_to(const point &target) const;
-    double distance_to(const point &start, const point &finish) const;
+    // Любые методы класса, не меняющие состояния его полей
+    // должны объявляться с ключевым словом const.
+    // Это показывает, что данные методы могут примеяться 
+    // константными объектами этого класса.
 
+    // Метод вычисления расстояния до другой точки.
+    // Входные параметры:
+    //      target - целевая точка.
+    double distance_to(point target) const;
+
+    // Метод вычисления расстояния до прямой,
+    // заданной двумя точками.
+    // Входные параметры:
+    //      start, finish - две точки на целевой прямой.
+    double distance_to(point start, point finish) const;
+
+
+    // Любой класс или функция, объявленные дружественными,
+    // будут иметь доступ к закрытым полям и методам класса.
+
+    // Тестирующий класс.
     friend class test_point;
+    // Функция чтения точки с консоли.
+    friend point get_point();
 };
 
-point get_point();
-void print(const point &p);
-
-bool is_line(const point &p1, const point &p2, const point &p3);
+// Функция вывода точки на консоль.
+void print(point p);
