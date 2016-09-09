@@ -1,5 +1,6 @@
 #include "test_point.h"
 #include "triangle.h"
+#include "circle.h"
 #include <iostream>
 
 using namespace std;
@@ -33,6 +34,14 @@ int main()
             cout << "Периметр треугольника: " << t.perimeter() << endl;
             cout << "Радиус описанной окружности: " << t.circumradius() << endl;
             cout << "Радиус висанной окружности: " << t.inradius() << endl;
+
+            size_t n;
+            cin >> n;
+            point* points = new point[n];
+            for (int i = 0; i < n; ++i)
+                p[i] = get_point();
+            print(min_circuncircle(points, n));
+            delete [] points;
         }
         catch (exception e) {
             cout << e.what() << endl;
