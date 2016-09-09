@@ -35,11 +35,11 @@ int main()
             cout << "Радиус описанной окружности: " << t.circumradius() << endl;
             cout << "Радиус висанной окружности: " << t.inradius() << endl;
 
-            size_t n;
-            cin >> n;
+            size_t n = number_of<point>("points.dat");
+            ifstream fin("points.dat");
             point* points = new point[n];
             for (int i = 0; i < n; ++i)
-                points[i] = get_point();
+                points[i] = read_binary<point>(fin);
             print(min_circuncircle(points, n));
             delete [] points;
         }

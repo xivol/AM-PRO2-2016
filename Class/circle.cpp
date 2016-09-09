@@ -62,7 +62,6 @@ circle min_circuncircle(const point * points, const size_t length)
             bool circum = true;
             for (int k = 0; k < length; ++k)
                 if (!c.contains(points[k])) {
-                    print(points[k]);
                     circum = false;
                     break;
                 }
