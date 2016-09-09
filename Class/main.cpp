@@ -1,3 +1,4 @@
+#include "test_point.h"
 #include "triangle.h"
 #include <iostream>
 
@@ -6,6 +7,7 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Russian");
+    test_point::run();
     // Ограничиваем время жизни объектов
     {
         try {

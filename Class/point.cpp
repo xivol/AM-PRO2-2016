@@ -44,7 +44,7 @@ double point::get_y() const
 
 double point::distance_to(const point & start, const point & finish) const
 {
-    return ((start.y - finish.y)*x + (finish.x - start.x)*y + 
+    return abs((start.y - finish.y)*x + (finish.x - start.x)*y + 
         (start.x*finish.y - finish.x*start.y)) / start.distance_to(finish);
 }
 

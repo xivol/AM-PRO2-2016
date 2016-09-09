@@ -2,6 +2,8 @@
 
 const double precision = 1E-10;
 
+class test_point;
+
 class point
 {
 private:
@@ -17,6 +19,8 @@ public:
 
     double distance_to(const point &target) const;
     double distance_to(const point &start, const point &finish) const;
+
+    friend class test_point;
 };
 
 point get_point();
