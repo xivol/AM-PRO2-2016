@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinkedList", "LinkedList\Li
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TreeStuff", "TreeStuff\TreeStuff.vcxproj", "{5B21B2A4-64D7-4B07-8580-4797A0F4BBF7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class", "Class\Class.vcxproj", "{715E374E-96B4-4E09-BF80-65B581BA9D63}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Class2016", "Class\Class.vcxproj", "{715E374E-96B4-4E09-BF80-65B581BA9D63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
