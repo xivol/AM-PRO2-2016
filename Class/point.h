@@ -1,4 +1,7 @@
 #pragma once
+
+const double precision = 1E-10;
+
 class point
 {
 private:
@@ -17,3 +20,5 @@ public:
 
 point get_point();
 void print(const point &p);
+
+bool is_line(const point &p1, const point &p2, const point &p3);
