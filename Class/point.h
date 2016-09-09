@@ -10,6 +10,7 @@ public:
     point();
     point(double x, double y);
     point(const point &p);
+    ~point();
     
     double get_x() const;
     double get_y() const;
