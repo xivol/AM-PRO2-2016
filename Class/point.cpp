@@ -1,8 +1,9 @@
-#include <exception>
+//
+// Лабораторная работа №4. Классы. Поля и vетоды
+// point.cpp
+//
 #include <iostream>
 #include "point.h"
-
-using namespace std;
 
 point get_point()
 {

@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №4. Классы. Поля и vетоды
+// test_point.cpp
+//
 #include "test_point.h"
 #include <cassert>
 #include <iostream>

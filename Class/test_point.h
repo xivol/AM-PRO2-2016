@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №4. Классы. Поля и vетоды
+// test_point.h
+//
 #pragma once
 #include "point.h"
 
