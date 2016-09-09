@@ -128,6 +128,7 @@
     <ClCompile Include="test_point.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="points.dat" />
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
