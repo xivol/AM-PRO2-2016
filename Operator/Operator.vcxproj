@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>

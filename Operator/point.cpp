@@ -60,7 +60,7 @@ point get_point()
 
 void print(const point & p)
 {
-    std::cout << "( " << p.get_x() << ", " << p.get_y() << " )";
+    std::cout << "(" << p.get_x() << ", " << p.get_y() << ")";
 }
 
 bool is_line(const point & p1, const point & p2, const point & p3)
@@ -72,7 +72,8 @@ bool is_line(const point & p1, const point & p2, const point & p3)
 
 bool operator==(const point &p1, const point &p2)
 {
-    return p1.get_x()==p2.get_x() && p1.get_y()==p2.get_y();
+    return abs(p1.get_x() - p2.get_x())<precision && 
+        abs(p1.get_y()==p2.get_y())<precision;
 }
 bool operator!=(const point &p1, const point &p2) 
 {

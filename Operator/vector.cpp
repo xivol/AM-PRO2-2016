@@ -37,7 +37,8 @@ void vector::normalize()
 
 bool operator==(const vector &v1, const vector &v2)
 {
-    return v1.get_x()== v2.get_x() && v1.get_y()==v2.get_y();
+    return abs(v1.get_x() - v2.get_x())<precision && 
+        abs(v1.get_y() - v2.get_y())<precision;
 }
 bool operator!=(const vector &v1, const vector &v2)
 {
@@ -75,7 +76,7 @@ double operator*(const vector &v1, const vector &v2)
 
 std::ostream &operator<<(std::ostream &os, const vector &v)
 {
-    os<<"( "<<v.get_x()<<" , "<<v.get_y()<<" )";
+    os<<"("<<v.get_x()<<" , "<<v.get_y()<<")";
     return os;
 }
 
