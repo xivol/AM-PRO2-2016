@@ -4,7 +4,7 @@
 
 class vector
 {
-    double x,y;
+    double x, y;
 public:
     vector();
     vector(double x, double y);
@@ -18,6 +18,7 @@ public:
     double angle(const vector& v) const;
 
     void normalize();
+    vector operator-() const;
 
     friend std::istream &operator>>(std::istream &is, vector &v);
 };
@@ -34,4 +35,4 @@ vector operator/(const vector &v, double k);
 double operator*(const vector &v1, const vector &v2);
 
 std::ostream &operator<<(std::ostream &os, const vector &v);
-std::istream &operator>>(std::istream &is, const vector &v);
+//std::istream &operator>>(std::istream &is, const vector &v);

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-point::point(): x(0.0), y(0.0) 
+point::point() : x(0.0), y(0.0)
 {
     //cout << "Создана точка (0,0)" << endl;
 }
@@ -18,7 +18,7 @@ point::point(double x, double y)
     //cout << "Создана точка ( " << x << " , " << y << " )" << endl;
 }
 
-point::point(const point &p): x(p.x), y(p.y) 
+point::point(const point &p) : x(p.x), y(p.y)
 {
     //cout << "Создана копия ( " << x << " , " << y << " )" << endl;
 }
@@ -45,7 +45,7 @@ double point::get_y() const
 
 double point::distance_to(const point & start, const point & finish) const
 {
-    return abs((start.y - finish.y)*x + (finish.x - start.x)*y + 
+    return abs((start.y - finish.y)*x + (finish.x - start.x)*y +
         (start.x*finish.y - finish.x*start.y)) / start.distance_to(finish);
 }
 
@@ -55,7 +55,7 @@ point get_point()
     std::cin >> x >> y;
     if (!std::cin)
         throw std::domain_error("Некорректные координаты точки");
-    return point(x,y);
+    return point(x, y);
 }
 
 void print(const point & p)
@@ -72,31 +72,33 @@ bool is_line(const point & p1, const point & p2, const point & p3)
 
 bool operator==(const point &p1, const point &p2)
 {
-    return abs(p1.get_x() - p2.get_x())<precision && 
-        abs(p1.get_y()==p2.get_y())<precision;
+    return abs(p1.get_x() - p2.get_x()) < precision &&
+        abs(p1.get_y() == p2.get_y()) < precision;
 }
-bool operator!=(const point &p1, const point &p2) 
+
+bool operator!=(const point &p1, const point &p2)
 {
-    return !(p1==p2);
+    return !(p1 == p2);
 }
 
 std::ostream &operator<<(std::ostream &os, const point &p)
 {
-    os<< "( " << p.get_x() << ", " << p.get_y() << " )";
+    os << "( " << p.get_x() << ", " << p.get_y() << " )";
     return os;
 }
-std::istream &operator>>(std::istream &is,  point &p)
+
+std::istream &operator>>(std::istream &is, point &p)
 {
-    is>>p.x>>p.y;
+    is >> p.x >> p.y;
     return is;
 }
 
 point operator+(const point &p, const vector &v)
 {
-    return point(p.get_x()+v.get_x(), p.get_y()+v.get_y());
+    return point(p.get_x() + v.get_x(), p.get_y() + v.get_y());
 }
 
 point operator-(const point &p, const vector &v)
 {
-    return point(p.get_x()-v.get_x(), p.get_y()-v.get_y());
+    return point(p.get_x() - v.get_x(), p.get_y() - v.get_y());
 }

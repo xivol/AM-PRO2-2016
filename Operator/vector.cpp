@@ -1,52 +1,60 @@
 #include "vector.h"
 #include <cmath>
 
-vector::vector(void):x(0.0),y(0.0) {}
-vector::vector(double x, double y):x(x),y(y){}
-vector::vector(const point &start, const point &finish):
-    x(finish.get_x()-start.get_x()), y(finish.get_y()-start.get_y()) {}
+vector::vector(void) :x(0.0), y(0.0) {}
+
+vector::vector(double x, double y) : x(x), y(y) {}
+
+vector::vector(const point &start, const point &finish) :
+    x(finish.get_x() - start.get_x()), y(finish.get_y() - start.get_y())
+{}
 
 
 double vector::get_x() const
 {
     return x;
 }
-double vector::get_y() const 
+double vector::get_y() const
 {
     return y;
 }
 
-double vector::length() const 
+double vector::length() const
 {
-    return sqrt(x*x+y*y);
+    return sqrt(x*x + y*y);
 }
 
-double vector::angle(const vector &v) const 
+double vector::angle(const vector &v) const
 {
-    return acos((*this *v)/length()/v.length());
+    return acos((*this *v) / length() / v.length());
 }
 
-void vector::normalize() 
+void vector::normalize()
 {
     double len = length();
-    if (len != 0.0){
-        x/=len;
-        y/=len;
+    if (len != 0.0) {
+        x /= len;
+        y /= len;
     }
+}
+
+vector vector::operator-() const
+{
+    return vector(-x, -y);
 }
 
 bool operator==(const vector &v1, const vector &v2)
 {
-    return abs(v1.get_x() - v2.get_x())<precision && 
-        abs(v1.get_y() - v2.get_y())<precision;
+    return abs(v1.get_x() - v2.get_x()) < precision &&
+        abs(v1.get_y() - v2.get_y()) < precision;
 }
 bool operator!=(const vector &v1, const vector &v2)
 {
-    return !(v1==v2);
+    return !(v1 == v2);
 }
 bool operator<(const vector &v1, const vector &v2)
 {
-    return v1.length()<v2.length();
+    return v1.length() < v2.length();
 }
 bool operator>(const vector &v1, const vector &v2)
 {
@@ -55,33 +63,35 @@ bool operator>(const vector &v1, const vector &v2)
 
 vector operator+(const vector &v1, const vector &v2)
 {
-    return vector(v1.get_x()+v2.get_x(), v1.get_y()+v2.get_y());
+    return vector(v1.get_x() + v2.get_x(), v1.get_y() + v2.get_y());
 }
 vector operator-(const vector &v1, const vector &v2)
 {
-    return vector(v1.get_x()-v2.get_x(), v1.get_y()-v2.get_y());
+    return vector(v1.get_x() - v2.get_x(), v1.get_y() - v2.get_y());
 }
+
 vector operator*(const vector &v, double k)
 {
-    return vector(v.get_x()*k,v.get_y()*k);
+    return vector(v.get_x()*k, v.get_y()*k);
 }
 vector operator/(const vector &v, double k)
 {
-    return vector(v.get_x()/k,v.get_y()/k);
+    return vector(v.get_x() / k, v.get_y() / k);
 }
+
 double operator*(const vector &v1, const vector &v2)
 {
-    return v1.get_x()*v2.get_x()+v1.get_y()*v2.get_y();
+    return v1.get_x()*v2.get_x() + v1.get_y()*v2.get_y();
 }
 
 std::ostream &operator<<(std::ostream &os, const vector &v)
 {
-    os<<"("<<v.get_x()<<" , "<<v.get_y()<<")";
+    os << "(" << v.get_x() << " , " << v.get_y() << ")";
     return os;
 }
 
 std::istream &operator>>(std::istream &is, vector &v)
 {
-    is>>v.x>>v.y;
+    is >> v.x >> v.y;
     return is;
 }
