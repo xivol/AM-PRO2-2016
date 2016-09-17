@@ -67,12 +67,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="point.cpp" />
-    <ClCompile Include="vector.cpp" />
+    <ClCompile Include="test_point.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="point.h" />
-    <ClInclude Include="binfile.h" />
-    <ClInclude Include="vector.h" />
+    <ClInclude Include="test_point.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
