@@ -131,10 +131,10 @@ std::ostream &operator<<(std::ostream &os, const polygon &p)
 
 std::istream &operator>>(std::istream &is, polygon &p)
 {
-    delete[] p.points;
     is >> p.len;
     if (p.len < 3)
         throw std::invalid_argument("Неверное число вершин");
+    delete[] p.points;
     for (int i = 0; i < p.len; ++i)
         is >> p.points[i];
     return is;
