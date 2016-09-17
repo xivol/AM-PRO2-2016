@@ -5,7 +5,6 @@
 #pragma once
 #include <cassert>
 #include <iostream>
-#include <fstream>
 
 const double precision = 1E-10;
 
