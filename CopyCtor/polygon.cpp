@@ -2,7 +2,6 @@
 // Лабораторная работа №7. Классы. Конструктор копии и операция присваивания
 // polygon.cpp
 //
-#include <iostream>
 #include "polygon.h"
 
 void polygon::copy(const point * from, point * to, const size_t size)

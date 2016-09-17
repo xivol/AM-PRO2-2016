@@ -3,7 +3,6 @@
 // polygon.h
 //
 #pragma once
-#include <iostream>
 #include "point.h"
 
 class polygon
