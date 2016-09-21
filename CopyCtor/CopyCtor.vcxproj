@@ -121,12 +121,14 @@
     <ClInclude Include="point.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="test_point.h" />
+    <ClInclude Include="test_polygon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="polygon.cpp" />
     <ClCompile Include="test_point.cpp" />
+    <ClCompile Include="test_polygon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

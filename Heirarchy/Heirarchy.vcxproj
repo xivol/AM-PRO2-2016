@@ -121,6 +121,7 @@
     <ClInclude Include="point.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="rectangle.h" />
+    <ClInclude Include="regular.h" />
     <ClInclude Include="triangle.h" />
   </ItemGroup>
   <ItemGroup>

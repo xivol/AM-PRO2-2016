@@ -5,6 +5,7 @@
 #include "point.h"
 #include "polygon.h"
 #include "test_point.h"
+#include "test_polygon.h"
 #include <iostream>
 
 using namespace std;
@@ -13,6 +14,7 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
     test_point::run();
+    test_polygon::run();
 
     try {
         point points[100];
