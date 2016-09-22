@@ -10,6 +10,8 @@ void polygon::copy(const point * from, point * to, const size_t size)
         to[i] = from[i];
 }
 
+polygon::polygon() :points(nullptr), size(0) {}
+
 polygon::polygon(const point * points, const size_t size)
 {
     assert(points);

@@ -6,9 +6,8 @@
 
 point * test_polygon::get_points(const size_t length)
 {
-
-    point *points = new point[n];
-    for (int i = 0; i < n; ++i) {
+    point *points = new point[length];
+    for (int i = 0; i < length; ++i) {
         points[i] = point(rand(), rand());
     }
     return points;

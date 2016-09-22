@@ -27,5 +27,7 @@ public:
     // Деструктор
     ~polygon();
 
+    double area() const;
+
     friend class test_polygon;
 };
