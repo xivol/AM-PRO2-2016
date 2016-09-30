@@ -1,5 +1,5 @@
 //
-// Лабораторная работа №8. Классы. Наследоване
+// Лабораторная работа №9. Классы. Наследоване
 // polygon.cpp
 //
 #include <iostream>
@@ -11,7 +11,7 @@ void polygon::copy(const point * from, point * to, const size_t size)
         to[i] = from[i];
 }
 
-polygon::polygon():points(nullptr), size(0){}
+polygon::polygon() : points(nullptr), size(0) {}
 
 polygon::polygon(const point * points, const size_t size)
 {
@@ -21,6 +21,29 @@ polygon::polygon(const point * points, const size_t size)
     this->points = new point[size];
     this->size = size;
     copy(points, this->points, size);
+}
+
+polygon::polygon(const polygon & p)
+{
+    this->points = new point[p.size];
+    this->size = p.size;
+    copy(p.points, points, size);
+}
+
+polygon & polygon::operator=(const polygon & p)
+{
+    if (p.size > this->size) {
+        delete[] points;
+        points = new point[p.size];
+    }
+    this->size = p.size;
+    copy(p.points, points, size);
+    return *this;
+}
+
+size_t polygon::count() const
+{
+    return size;
 }
 
 polygon::~polygon()

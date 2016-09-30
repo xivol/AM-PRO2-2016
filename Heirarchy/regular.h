@@ -5,7 +5,6 @@ class regular : public polygon
 {
     point center;
     double side;
-    bool convex() const;
 public:
     regular(const size_t sides, const double side, const point &center);
 

@@ -5,9 +5,6 @@
 #pragma once
 #include "point.h"
 
-
-class test_polygon;
-
 class polygon
 {
 private:
