@@ -1,32 +1,30 @@
+//
+// Лабораторная работа №7. Классы. Конструктор копии и операция присваивания
+// polygon.h
+//
 #pragma once
-#include <iostream>
 #include "point.h"
 
 class polygon
 {
+private:
+    // масив точек
     point *points;
-    size_t len;
+    // длина массива
+    size_t size;
 
-    void copy(const point *from, point *to, const size_t length);
+    // Вспомогательная функция копирования массива точек
+    void copy(const point *from, point *to, const size_t size);
+
+    // Закрытый конструктор без параметров
+    // может быть использован в дружественных классах и функциях
+    polygon();
 public:
-    polygon(const point *points, const size_t length);
-    ~polygon();
+    // Конструктор от массива точек
+    polygon(const point *points, const size_t size);
 
-    polygon(const polygon &p);
-    polygon &operator=(const polygon &p);
+    // Деструктор
+    ~polygon();   
 
-    point operator[](const size_t index) const;
-    size_t count() const;
-
-    double area() const;
-    double perimeter() const;
-    bool convex() const;
-    point center() const;
-
-    friend std::ostream &operator<<(std::ostream &os, const polygon &p);
-    friend std::istream &operator>>(std::istream &is, polygon &p);
-    friend bool operator==(const polygon &p1, const polygon &p2);
-    
+    friend class test_polygon;
 };
-
-bool operator!=(const polygon &p1, const polygon &p2);
