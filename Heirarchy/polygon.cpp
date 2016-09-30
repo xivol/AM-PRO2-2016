@@ -34,6 +34,6 @@ double polygon::area() const
     for (int i = 1; i < size; ++i) {
         s += (points[i - 1].get_x() + points[i].get_x())*(points[i - 1].get_y() - points[i].get_y());
     }
-    s += (points[size - 1].get_x() + points[0].get_x())*(points[size - 1].get_y() - points[o].get_y());
+    s += (points[size - 1].get_x() + points[0].get_x())*(points[size - 1].get_y() - points[0].get_y());
     return abs(s / 2.0);
 }
