@@ -13,5 +13,7 @@ public:
     double width() const;
     double height() const;
 
+    double inradius() const;
+    double circumradius() const;
 };
 
