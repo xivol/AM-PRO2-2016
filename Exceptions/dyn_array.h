@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
+#include "crtdynmem.h"
 
 class dyn_array
 {
-public:
-    typedef int datatype;
+public:    
     dyn_array();
     dyn_array(int size);
     dyn_array(const char *filename, bool is_text = true);
@@ -13,9 +13,11 @@ public:
     dyn_array(const dyn_array& d);    
     dyn_array &operator=(const dyn_array& d);
 
-    datatype operator[](int index) const;
+    typedef int datatype;
     datatype &operator[](int index);
+    datatype operator[](int index) const;
     int count() const;
+
     void resize(int new_size);
     void append(const datatype &x);
 private:
