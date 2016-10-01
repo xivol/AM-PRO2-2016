@@ -4,7 +4,7 @@ dyn_array::dyn_array() :data(nullptr), size(0) {}
 
 dyn_array::dyn_array(int size) {
     if (size <= 0)
-        throw std::domain_error("");
+        throw std::domain_error("dyn_array: значение размера должно быть положительным");
     this->size = size;
     data = new datatype[size];
 }
@@ -43,18 +43,18 @@ dyn_array & dyn_array::operator=(const dyn_array & d)
 dyn_array::datatype dyn_array::operator[](int index) const
 {
     if (index < 0)
-        throw std::domain_error("");
+        throw std::domain_error("operator[]: значение index должно быть не отрицательным");
     if (index >= size)
-        throw std::out_of_range("");
+        throw std::out_of_range("operator[]: значение index должно быть < size");\
     return data[index];
 }
 
 dyn_array::datatype & dyn_array::operator[](int index)
 {
     if (index < 0)
-        throw std::domain_error("");
+        throw std::domain_error("operator[]: значение index должно быть не отрицательным");
     if (index >= size)
-        throw std::out_of_range("");
+        throw std::out_of_range("operator[]: значение index должно быть < size");
     return data[index];
 }
 
@@ -66,7 +66,7 @@ int dyn_array::count() const
 void dyn_array::resize(int new_size)
 {
     if (new_size < 0)
-        throw std::domain_error("");    
+        throw std::domain_error("resize: значение new_size должно быть не отрицательным");    
     if (size == new_size) return;
     datatype *tmp = data;
     data = new datatype[new_size];
