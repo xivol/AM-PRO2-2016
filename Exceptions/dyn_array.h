@@ -18,10 +18,9 @@ public:
     datatype &operator[](int index);
     datatype operator[](int index) const;
     int count() const;
-
     void resize(int new_size);
-    void append(const datatype &x);
 
+    void append(const datatype &x);
 	void insert(int index, const datatype &x);
 	void remove_at(int index);
 	void remove(const datatype &x);

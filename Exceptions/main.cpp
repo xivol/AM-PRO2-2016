@@ -1,6 +1,9 @@
-#include "dyn_array.h"
+//
+//
+//
 #include <iostream>
 #include <limits>
+#include "dyn_array.h"
 
 using namespace std;
 
@@ -8,9 +11,9 @@ int main()
 {
     setlocale(LC_ALL, "Russian");    
     try {   
-        int size = INT32_MAX;
+        int size = 0;
         cout << "Введите количество элементов в массиве:" << endl;
-        
+        //
         cin.exceptions(ios_base::failbit);
         cin >> size;
         dyn_array d(size);
@@ -41,8 +44,6 @@ int main()
     catch (const exception &e) {
         cerr << "Непредвиденная ошибка: " << e.what() << endl;
     }
-
-
     system("pause");
     return 0;
 }
