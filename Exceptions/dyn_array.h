@@ -33,14 +33,6 @@ private:
     void file_init(const char *filename);
     void text_init(const char *filename);
 
-public:
-	class array_exception : public std::exception {
-	};
-	class size_exception : public array_exception {
-	};
-	class index_exception : public array_exception {
-	};
-	class file_exception :public array_exception {
-	};
 };
+
 

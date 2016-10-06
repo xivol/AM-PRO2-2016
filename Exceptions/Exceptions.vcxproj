@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="array_exception.h" />
     <ClInclude Include="crtdynmem.h" />
     <ClInclude Include="dyn_array.h" />
   </ItemGroup>
