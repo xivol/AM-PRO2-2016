@@ -11,7 +11,7 @@ protected:
 	// Сообщение об ошибке
 	std::string msg;
 public:
-	array_exception(const char *message = "Ошибка массива", const dyn_array* source = nullptr) :
+	array_exception(const dyn_array* source = nullptr, const char *message = "Ошибка массива") :
 		src(source), msg(message) {}
 
 	const dyn_array *source() const {
@@ -30,7 +30,7 @@ public:
 	size_exception(int size, const dyn_array* source = nullptr) :
 		array_exception(source), error_size(size) {
 		std::stringstream ss;
-		ss << "Некорректный размер массива:" << error_size;
+		ss << "Некорректный размер массива: " << error_size;
 		msg = ss.str();
 	}
 	size_exception(int size, const char * message, const dyn_array* source = nullptr) :
@@ -47,7 +47,7 @@ public:
 	index_exception(int index, const dyn_array* source = nullptr) :
 		array_exception(source), error_index(index) {
 		std::stringstream ss;
-		ss << "" << error_index;
+		ss << "Некорректный индекс в массиве: " << error_index;
 		msg = ss.str();
 	}
 	
