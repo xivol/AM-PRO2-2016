@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №10. Классы. Обработка исключений
+// dyn_array.cpp
+//
 #include "dyn_array.h"
 
 dyn_array::dyn_array() :data(nullptr), size(0) {}

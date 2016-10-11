@@ -1,5 +1,6 @@
 //
-//
+// Лабораторная работа №10. Классы. Обработка исключений
+// main.cpp
 //
 #include <iostream>
 #include <limits>
@@ -13,7 +14,8 @@ int main()
     try {   
         int size = 0;
         cout << "Введите количество элементов в массиве:" << endl;
-        //
+
+        // Выбрасывать исключение при установке флага fail
         cin.exceptions(ios_base::failbit);
         cin >> size;
         dyn_array d(size);
