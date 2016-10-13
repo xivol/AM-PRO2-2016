@@ -1,11 +1,12 @@
 //
-// Лабораторная работа №12. Классы. Виртуальные функции
+// Лабораторная работа №13. Классы. Абстрактный класс
 // polygon.h
 //
 #pragma once
 #include "point.h"
+#include "shape.h"
 
-class polygon
+class polygon: public shape
 {
 protected:
     // масив точек
@@ -28,7 +29,7 @@ public:
     ~polygon();   
 
     // Вывод
-	void print() const;
+	void print(std::ostream &os = std::cout) const;
 
     friend class test_polygon;
 };

@@ -1,5 +1,5 @@
 //
-// Лабораторная работа №12. Классы. Виртуальные функции
+// Лабораторная работа №13. Классы. Абстрактный класс
 // polygon.cpp
 //
 #include <iostream>
@@ -48,11 +48,10 @@ polygon::~polygon()
     delete[] points;
 }
 
-void polygon::print() const
+void polygon::print(std::ostream &os) const
 {
-	std::cout << "Многоугльник: { ";
-	for (int i = 0; i < size - 1; ++i) {
-		std::cout << points[i] << ", ";
-	}
-	std::cout << points[size - 1] << " }" << std::endl;
+	os << "Многоугльник: { ";
+	for (int i = 0; i < size - 1; ++i)
+		os << points[i] << ", ";
+	os << points[size - 1] << " }" << std::endl;
 }

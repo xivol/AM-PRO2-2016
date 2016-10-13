@@ -1,5 +1,5 @@
 //
-// Лабораторная работа №12. Классы. Виртуальные функции
+// Лабораторная работа №13. Классы. Абстрактный класс
 // triangle.h
 //
 #pragma once
@@ -12,7 +12,7 @@ public:
     triangle(const triangle &t);
     triangle& operator=(const triangle &t);
 
-    void print() const;
+    void print(std::ostream &os = std::cout) const;
     friend class test_triangle;
 };
 

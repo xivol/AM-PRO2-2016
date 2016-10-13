@@ -1,5 +1,5 @@
 //
-// Лабораторная работа №12. Классы. Виртуальные функции
+// Лабораторная работа №13. Классы. Абстрактный класс
 // rectangle.h
 //
 #pragma once
@@ -12,7 +12,7 @@ public:
     rectangle(const rectangle &r);
     rectangle &operator=(const rectangle &r);
 
-    void print() const;
+    void print(std::ostream &os = std::cout) const;
     friend class test_rectangle;
 };
 
