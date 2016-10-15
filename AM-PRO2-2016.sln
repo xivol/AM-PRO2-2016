@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polymorph", "Polymorph\Polymorph.vcxproj", "{7A2E44FE-2E11-410A-9DC8-50F1A3C9290A}"
 EndProject
@@ -28,7 +28,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Exceptions", "Exceptions\Ex
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Abstract", "Abstract\Abstract.vcxproj", "{8F8470C3-C5E3-4B84-B293-FD575D2E9ACC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Accessment_Tasks", "Accessment_Tasks\Accessment_Tasks.vcxproj", "{1D4AEE1F-23AF-4F8D-81F1-B1062266923B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assessment_Tasks", "Accessment_Tasks\Accessment_Tasks.vcxproj", "{1D4AEE1F-23AF-4F8D-81F1-B1062266923B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Stack", "Stack\Stack.vcxproj", "{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -216,6 +218,22 @@ Global
 		{1D4AEE1F-23AF-4F8D-81F1-B1062266923B}.Release|x64.Build.0 = Release|x64
 		{1D4AEE1F-23AF-4F8D-81F1-B1062266923B}.Release|x86.ActiveCfg = Release|Win32
 		{1D4AEE1F-23AF-4F8D-81F1-B1062266923B}.Release|x86.Build.0 = Release|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|Win32.Build.0 = Debug|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|x64.ActiveCfg = Debug|x64
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|x64.Build.0 = Debug|x64
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|x86.ActiveCfg = Debug|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Debug|x86.Build.0 = Debug|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|Win32.ActiveCfg = Release|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|Win32.Build.0 = Release|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|x64.ActiveCfg = Release|x64
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|x64.Build.0 = Release|x64
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|x86.ActiveCfg = Release|Win32
+		{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

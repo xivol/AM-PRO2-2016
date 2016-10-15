@@ -71,10 +71,11 @@ void dyn_array::resize(int new_size)
 {
     if (new_size < 0)
         throw std::domain_error("resize: значение new_size должно быть не отрицательным");    
-    if (size == new_size) return;
+    if (size >= new_size) return;
     datatype *tmp = data;
     data = new datatype[new_size];
-    copy(tmp, data, size);
+    if (size != 0)
+        copy(tmp, data, new_size);
     delete[] tmp;
     size = new_size;
 }
