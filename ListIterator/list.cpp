@@ -7,24 +7,24 @@ list::list()
 
 list::list(const list & l)
 {
-    copy_list(first, last, l.first, l.last);
+    copy_list(l.first, l.last);
 }
 
 list & list::operator=(const list & l)
 {
-    delete_list(first);
-    copy_list(first, last, l.first, l.last);
+    delete_list();
+    copy_list(l.first, l.last);
     return *this;
 }
 
 list::~list()
 {
-    delete_list(first, last);
+    delete_list();
 }
 
 bool list::is_empty() const
 {
-    return first == nullptr &&last == nullptr;
+    return first == nullptr && last == nullptr;
 }
 
 size_t list::size() const
@@ -110,11 +110,11 @@ list::datatype list::front() const
     return first->data;
 }
 
-void list::copy_list(const node * from_first, const node * from_last, node *& to_first, node *& to_last)
+void list::copy_list(const node * from_first, const node * from_last)
 {    
-    to_first = nullptr;
-    to_last = nullptr;
-    node **to = &to_first;
+    first = nullptr;
+    last = nullptr;
+    node **to = &first;
     const node *from = from_first;
     while (from != from_last->next) {
         node *prev = *to;
@@ -125,10 +125,10 @@ void list::copy_list(const node * from_first, const node * from_last, node *& to
         from = from->next;
     }
     (*to)->next = nullptr;
-    to_last = *to;
+    last = *to;
 }
 
-void list::delete_list(node *& first, node *& last)
+void list::delete_list()
 {
     while (first != last->next) {
         node *t = first;

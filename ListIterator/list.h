@@ -1,4 +1,5 @@
-#pragma once
+﻿#pragma once
+#include <iostream>
 
 class list {
 public:
@@ -21,46 +22,55 @@ public:
     datatype front() const;
 
 private:
-    // ���� ������
+    // Узел списка
 	struct node {
 		datatype data;
 		node *prev, *next;
 	};
 
-    // ������ � ����� ������
+    // Начало и конец списка
 	node *first, *last;
 
-    // ����������� ������
-    void copy_list(const node *from_first, const node *from_last, node *&to_first, node *&to_last);
-    // �������� ������
-    void delete_list(node *&first, node *&last);
+    // Копирование списка
+    void copy_list(const node *from_first, const node *from_last);
+    // Удаление списка
+    void delete_list();
 public:
 //
-// ��������
+// Внешний итератор
 //
+    // Поскольку итератор нельзя создать вне спика,
+    // класс будем описывать, как внутренний тип
 	class iterator {
-        // ��������� �� ���� ������
+
+        // Указатель на узел списка
 		node *current;
-    private:
-        // �������� �����������,
-        // �������� ������ ������ ������
-        iterator(const node *list);
+
+        // Указатель на список
+        const list *current_list;
+
+        // Закрытый конструктор
+        // доступен только внутри класса list
+        iterator(const list *collection, const node *current);
 	public:
-        // �������������
+        // Разименование
         datatype &operator*();
-        // ������������� ������������ ���������
+        // Разименование константного итератора
         datatype operator*() const;
         
-        iterator &operator--();
-        iterator &operator--(int);
-        
+        // Инкремент (префиксный)
         iterator &operator++();
-        iterator &operator++(int);
+        // Инкремент (постфиксный)
+        iterator operator++(int);
 
+        // Сравнение на равенство
         bool operator==(const iterator &it) const;
+        // Сравнение на неравенство
         bool operator!=(const iterator &it) const;
 	};
-
+//
+// Методы для работы с итератором
+//
     iterator begin() const;
     iterator end() const;
 
@@ -68,3 +78,5 @@ public:
     void insert(const iterator &it, const datatype &x);
     void remove(const iterator &it);
 };
+
+std::ostream &operator<<(std::ostream &os, const list &l);
