@@ -3,6 +3,7 @@
 // main.cpp
 //
 #include "stack.h"
+#include "test_d_stack.h"
 #include <ctime>
 #include <iostream>
 
@@ -10,8 +11,10 @@ using namespace std;
 
 int main()
 {
+    test_d_stack::run();
+
     d_stack s;
-    time_t start = clock();
+    time_t start = clock() ;
 
     const int MAX_N = 1000;
     int n = MAX_N;   

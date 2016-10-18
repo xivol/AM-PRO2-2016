@@ -121,11 +121,13 @@
     <ClInclude Include="crtdynmem.h" />
     <ClInclude Include="dyn_array.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="test_d_stack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dyn_array.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stack.cpp" />
+    <ClCompile Include="test_d_stack.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

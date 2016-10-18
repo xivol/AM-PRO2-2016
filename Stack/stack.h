@@ -20,7 +20,7 @@ public:
     virtual void push(const datatype &x) = 0;
 
     // Изъятие элемента со стека
-    virtual datatype pop() = 0;
+    virtual void pop() = 0;
 
     // Просмотр вершины стека
     virtual datatype top() = 0;
@@ -36,10 +36,11 @@ public:
 
     bool is_empty();
     void push(const datatype &x);
-    datatype pop();
+    void pop();
     datatype top();
 
     friend std::ostream &operator<<(std::ostream &os, const d_stack &s);
+    friend class test_d_stack;
 };
 
 // Стек на базе списка
@@ -64,7 +65,7 @@ public:
 
     bool is_empty();
     void push(const datatype &x);
-    datatype pop();
+    void pop();
     datatype top();
 
     friend std::ostream &operator<<(std::ostream &os, const l_stack &s);

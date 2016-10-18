@@ -42,5 +42,7 @@ private:
     datatype *data;
     size_t size;
     void copy(const datatype *from, datatype* to, size_t size);
+
+    friend class test_dyn_array;
 };
 
