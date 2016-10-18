@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7A2E44FE-2E11-410A-9DC8-50F1A3C9290A}</ProjectGuid>
-    <RootNamespace>Polymorph</RootNamespace>
+    <ProjectGuid>{CDF63969-262B-4A1C-9908-A6A3EF75C5B6}</ProjectGuid>
+    <RootNamespace>Exceptions</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,21 +118,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Expression.h" />
-    <ClInclude Include="point.h" />
-    <ClInclude Include="polygon.h" />
-    <ClInclude Include="rectangle.h" />
-    <ClInclude Include="triangle.h" />
+    <ClInclude Include="crtdynmem.h" />
+    <ClInclude Include="dyn_array.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README_old.md" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="dyn_array.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="point.cpp" />
-    <ClCompile Include="polygon.cpp" />
-    <ClCompile Include="rectangle.cpp" />
-    <ClCompile Include="triangle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
