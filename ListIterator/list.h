@@ -3,26 +3,43 @@
 
 class list {
 public:
+    // Тип данных в списке
 	typedef int datatype;
 
     list();
     list(const list &l);
     list &operator=(const list &l);
     ~list();
-
-    bool is_empty() const;
+    
+    // Количество элементов в списке
     size_t size() const;
 
+    // Проверка списка на пустоту
+    bool is_empty() const
+    {
+        // функция определенная в теле класса
+        // становится встраеваемой
+        return first == nullptr && last == nullptr;
+    }
+
+    // Добавление элемента в конец
     void push_back(const datatype &x);
+    // Извлечение последнего элемнта
     void pop_back();
+    // Получение последнего элемента
     datatype back() const;
     
+    // Добавление элемента в начало
     void push_front(const datatype &x);    
+    // Извлечение первого элемента
     void pop_front();
+    // Получение первого элемента
     datatype front() const;
 
+    // Тестирующий класс
+    friend class test_list;
 private:
-    // Узел списка
+    // Описание узла списка
 	struct node {
 		datatype data;
 		node *prev, *next;
@@ -31,33 +48,32 @@ private:
     // Начало и конец списка
 	node *first, *last;
 
-    // Копирование списка
+    // Метод для копирование элементов из другого списка
     void copy_list(const node *from_first, const node *from_last);
-    // Удаление списка
+    // Метод удаления списка
     void delete_list();
+
 public:
 //
 // Внешний итератор
 //
-    // Поскольку итератор нельзя создать вне спика,
-    // класс будем описывать, как внутренний тип
+
+    // Будем описывать итератор, как внутренний тип
 	class iterator {
 
         // Указатель на узел списка
 		node *current;
 
         // Указатель на список
-        const list *current_list;
+        const list *collection;
 
         // Закрытый конструктор
-        // доступен только внутри класса list
-        iterator(const list *collection, const node *current);
+        // доступен только в дружественных классах 
+        iterator(const list *collection, node *current);
 	public:
         // Разименование
         datatype &operator*();
-        // Разименование константного итератора
-        datatype operator*() const;
-        
+
         // Инкремент (префиксный)
         iterator &operator++();
         // Инкремент (постфиксный)
@@ -67,16 +83,33 @@ public:
         bool operator==(const iterator &it) const;
         // Сравнение на неравенство
         bool operator!=(const iterator &it) const;
+
+        // Объявляем класс, 
+        // которому можно создавать итераторы
+        friend class list;
 	};
+
 //
 // Методы для работы с итератором
 //
-    iterator begin() const;
-    iterator end() const;
 
+    // Получение итерартора на начало списка
+    iterator begin();
+    // Получение итератора за концом списка
+    iterator end();
+
+    // Поиск элемента с заданным значениемв списке
+    // и возвращение итератора, указывающего на него.
+    // В случае, если элемент с заданным значением не найден,
+    // Возвращается итератор list::end()
     iterator find(const datatype &x) const;
+
+    // Вставка элемента, перед элементом на который указывает итератор
     void insert(const iterator &it, const datatype &x);
+
+    // Удаление элемента на который указывает итератор
     void remove(const iterator &it);
+
 };
 
-std::ostream &operator<<(std::ostream &os, const list &l);
+std::ostream &operator<<(std::ostream &os, list &l);

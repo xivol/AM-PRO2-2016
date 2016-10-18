@@ -22,11 +22,6 @@ list::~list()
     delete_list();
 }
 
-bool list::is_empty() const
-{
-    return first == nullptr && last == nullptr;
-}
-
 size_t list::size() const
 {
     size_t sz = 0;
@@ -42,16 +37,16 @@ void list::push_back(const datatype & x)
 {
     if (last == nullptr) {
         last = new node;
-        last->next = nullptr;
         last->prev = nullptr;
         first = last;
     }
     else {
         last->next = new node;
-        last->next->prev = last;
+        last->next->prev = last;        
         last = last->next;
     }
     last->data = x;    
+    last->next = nullptr;
 }
 
 void list::pop_back()
@@ -79,7 +74,6 @@ void list::push_front(const datatype & x)
     if (first == nullptr) {
         first = new node;
         first->next = nullptr;
-        first->prev = nullptr;
         last = first;
     }
     else {
@@ -88,6 +82,7 @@ void list::push_front(const datatype & x)
         first = first->prev;
     }
     first->data = x;
+    first->prev = nullptr;
 }
 
 void list::pop_front()
@@ -130,11 +125,68 @@ void list::copy_list(const node * from_first, const node * from_last)
 
 void list::delete_list()
 {
-    while (first != last->next) {
+    while (first != last) {
         node *t = first;
         first = first->next;
         delete t;
     }
+    delete last;
     first = nullptr;
     last = nullptr;
+}
+
+list::iterator list::begin()
+{
+    return iterator(this, first);
+}
+
+//list::const_iterator list::begin() const
+//{
+//    return const_iterator(this, first);
+//}
+
+list::iterator list::end()
+{
+    return iterator(this, nullptr);
+}
+
+//list::const_iterator list::end() const
+//{
+//    return const_iterator(this, nullptr);
+//}
+
+list::iterator::iterator(const list * collection, node * current) :
+    current(current), collection(collection) 
+{}
+
+list::datatype & list::iterator::operator*()
+{
+    return current->data;
+}
+
+list::iterator & list::iterator::operator++()
+{
+    if (current == nullptr)
+        throw std::out_of_range("Инкремент пустого итератора");
+    current = current->next;
+    return *this;
+}
+
+list::iterator list::iterator::operator++(int)
+{
+    if (current == nullptr)
+        throw std::out_of_range("Инкремент пустого итератора");
+    list::iterator it = *this;
+    current = current->next;
+    return it;
+}
+
+bool list::iterator::operator==(const iterator & it) const
+{
+    return it.collection == this->collection && it.current == this->current;
+}
+
+bool list::iterator::operator!=(const iterator & it) const
+{
+    return !(*this == it);
 }

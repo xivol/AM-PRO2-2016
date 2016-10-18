@@ -60,7 +60,7 @@ bool test_d_stack::pop()
         assert(true);
     }
     catch (...) {
-        assert(false && "Unexpected empty pop exception");
+        assert(false && "Неожиданное исключение при пустом стеке");
     }
 
     int n = 1000;
@@ -86,7 +86,7 @@ bool test_d_stack::top()
     d_stack stack;
     try {
         stack.top();
-        assert(false && "Empty top exception expected");
+        assert(false && "Ожидалось исключение при пустом стеке");
     }
     catch (...) {
         assert(true);
