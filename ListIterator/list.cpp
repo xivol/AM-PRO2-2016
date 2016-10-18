@@ -190,3 +190,11 @@ bool list::iterator::operator!=(const iterator & it) const
 {
     return !(*this == it);
 }
+
+
+std::ostream &operator<<(std::ostream &os, list &l)
+{
+    for (list::iterator i = l.begin(); i != l.end(); ++i) {
+        std::cout << *i << std::endl;
+    }
+}
