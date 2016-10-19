@@ -29,14 +29,49 @@ bool test_list::is_equal(const list::node * l1, const list::node * l2)
     return l1 == l2;
 }
 
+bool test_list::copy_list()
+{
+#ifdef _DEBUG
+	cerr << "test_list::copy_list: ";
+#endif
+	for (int i = 1; i < 100; ++i) {
+		list *test1 = generate_list(i);
+		list test2;
+		test2.copy_list(test1->first, test1->last);
+		assert(is_equal(test1->first, test2.first));
+		delete test1;
+	}
+#ifdef _DEBUG
+	cerr << "OK" << endl;
+#endif
+	return true;
+}
+
+bool test_list::delete_list()
+{
+#ifdef _DEBUG
+	cerr << "test_list::delete_list: ";
+#endif
+	for (int i = 0; i < 100; ++i) {
+		list *test1 = generate_list(i);
+		test1->delete_list();
+		assert(test1->first == nullptr && test1->last == nullptr);
+		delete test1;
+	}
+#ifdef _DEBUG
+	cerr << "OK" << endl;
+#endif
+	return true;
+}
+
 bool test_list::copy_ctor()
 {
 #ifdef _DEBUG
-    cerr << "test_list::copy_ctor: " << endl;
+    cerr << "test_list::copy_ctor: ";
 #endif
     for (int i = 1; i < 100; ++i) {
         list *test1 = generate_list(i);
-        list test2 = *test1;
+        list test2(*test1);
         assert(is_equal(test1->first, test2.first));
         delete test1;
     }
@@ -50,7 +85,7 @@ bool test_list::copy_ctor()
 bool test_list::assign()
 {
 #ifdef _DEBUG
-    cerr << "test_list::assign: " << endl;
+    cerr << "test_list::assign: ";
 #endif
     for (int i = 1; i < 100; ++i) {
         list *test1 = generate_list(i);
@@ -69,7 +104,7 @@ bool test_list::assign()
 bool test_list::push_back()
 {
 #ifdef _DEBUG
-    cerr << "test_list::push_back: " << endl;
+    cerr << "test_list::push_back: ";
 #endif
 
     list test;
@@ -113,5 +148,6 @@ bool test_list::back()
 bool test_list::run()
 {
     test_list test;
-    return test.copy_ctor() && test.assign() && test.push_back();
+    return test.copy_list() && test.delete_list() && 
+		test.copy_ctor() && test.assign() && test.push_back();
 }

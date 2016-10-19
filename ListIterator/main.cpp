@@ -16,7 +16,7 @@ int main()
     while (n--)
         l.push_back(n);
 
-    //cout << l << endl;
+    cout << l << endl;
     
     system("pause");
     return 0;

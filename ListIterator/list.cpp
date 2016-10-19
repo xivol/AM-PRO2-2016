@@ -18,7 +18,7 @@ void list::copy_list(const node * from_first, const node * from_last)
         to = &(*to)->next;
         from = from->next;
     }
-    (*to)->next = nullptr;
+    *to = nullptr;
     last = *to;
 }
 
@@ -93,7 +93,7 @@ list::datatype list::back() const
 std::ostream &operator<<(std::ostream &os, list &l)
 {
     for (list::iterator i = l.begin(); i != l.end(); ++i) {
-        std::cout << *i << std::endl;
+		os << *i << std::endl;
     }
     return os;
 }
