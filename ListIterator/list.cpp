@@ -56,17 +56,6 @@ list::~list()
     delete_list();
 }
 
-size_t list::size() const
-{
-    size_t sz = 0;
-    node *t = first;
-    while (t) {
-        sz++;
-        t = t->next;
-    }
-    return sz;
-}
-
 void list::push_back(const datatype & x)
 {
     if (last == nullptr) {
