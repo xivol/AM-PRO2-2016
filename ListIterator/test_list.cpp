@@ -149,5 +149,6 @@ bool test_list::run()
 {
     test_list test;
     return test.copy_list() && test.delete_list() && 
-		test.copy_ctor() && test.assign() && test.push_back();
+		test.copy_ctor() && test.assign() && test.push_back() &&
+		test.back();
 }
