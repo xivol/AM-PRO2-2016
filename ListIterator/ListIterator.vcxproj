@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="crtdynmem.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="test_list.h" />
   </ItemGroup>
