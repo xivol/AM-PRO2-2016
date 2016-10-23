@@ -38,7 +38,7 @@ l_stack::l_stack(const l_stack & s) : begin(nullptr)
 
 l_stack & l_stack::operator=(const l_stack & s)
 {
-    if (begin != nullptr)
+    if (! is_empty())
         delete_list();
     copy_list(s.begin);
     return *this;
