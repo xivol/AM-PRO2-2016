@@ -55,6 +55,12 @@ class l_stack : public stack
 
     // Начало списка
     node *begin;
+
+    // Удаление списка
+    void delete_list();
+
+    // Копирование списка
+    void copy_list(const node* l);
 public:
     l_stack();
 
