@@ -87,7 +87,7 @@ void list::push_front(const datatype & x)
 
 void list::pop_front()
 {
-    if (first == nullptr)return;
+    if (first == nullptr) return;
     if (first->next == nullptr) {
         delete first;
         first = nullptr;

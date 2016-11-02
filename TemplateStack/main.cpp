@@ -38,6 +38,7 @@ int priority(char op)
 {
     switch (op) {
         case '(':
+        case ')':
             return 0;
         case '+':
         case '-':
@@ -45,7 +46,7 @@ int priority(char op)
         case '*':
         case '/':
             return 2;
-        case ')':
+        case '^':
             return 3;
     }
 }
@@ -59,12 +60,13 @@ void RPN(const char *source, char *result)
             case '-':
             case '*':
             case '/':
-            case '(':               
+            case '^':
                 while (!st.is_empty() && priority(*source) < priority(st.top())) {
                     *result = st.top();
-                    result += 1;                    
+                    result += 1;
                     st.pop();
                 }
+            case '(':               
                 st.push(*source);
                 break;
             case ')':
@@ -87,7 +89,9 @@ void RPN(const char *source, char *result)
         st.pop();
         result += 1;
     }
+    *result = 0;
 }
+
 double eval(double x, double y, char op)
 {
     switch (op) {
@@ -99,8 +103,12 @@ double eval(double x, double y, char op)
             return x * y;
         case '/':
             return x / y;
+        case '^':
+            return pow(x, y);
     }
+    return nan("");
 }
+
 double calc(const char *source)
 {
     stack<double> values;
@@ -111,25 +119,20 @@ double calc(const char *source)
             case '-':
             case '*':
             case '/':
+            case '^':
                 while (!op.is_empty() && priority(*source) < priority(op.top())) {
-                    double x = values.top();
-                    values.pop();
-                    double y = values.top();
-                    values.pop();
-                    values.push(eval(x, y, op.top()));
-                    op.pop();
+                    double y = values.pop();
+                    double x = values.pop();
+                    values.push(eval(x, y, op.pop()));
                 }
             case '(':
                 op.push(*source);
                 break;
             case ')':
                 while (!op.is_empty() && priority(op.top()) != 0) {
-                    double y = values.top();
-                    values.pop();
-                    double x = values.top();
-                    values.pop();
-                    values.push(eval(x, y, op.top()));
-                    op.pop();
+                    double y = values.pop();
+                    double x = values.pop();
+                    values.push(eval(x, y, op.pop()));
                 }
                 if (op.is_empty()) throw "";
                 op.pop();
@@ -140,26 +143,52 @@ double calc(const char *source)
         source += 1;
     }
     while (!op.is_empty()) {
-        double x = values.top();
-        values.pop();
-        double y = values.top();
-        values.pop();
-        values.push(eval(x, y, op.top()));
-        op.pop();
+        double y = values.pop();
+        double x = values.pop();
+        values.push(eval(x, y, op.pop()));
     }
+    return values.top();
+}
+
+double calc_rpn(const char* source)
+{    
+    char * rpn = new char[strlen(source) + 1];
+    RPN(source, rpn);
+    stack<double> values;
+    char * i = rpn;
+    while (*i) {
+        switch (*i) {
+            case '+':
+            case '-':
+            case '*':
+            case '/': 
+            case '^':
+            {
+                double y = values.pop();
+                double x = values.pop();
+                values.push(eval(x, y, *i));
+                break;
+            }
+            default:
+                values.push(*i - '0');
+        }
+        i+=1;
+    }
+    delete rpn;
     return values.top();
 }
 
 int main()
 {    
-    const char * str = "((1+2)*(3-4))/5";
+    const char * str = "((1+2)*(3-4)^2)/5";
 
     cout << (balanced_braces(str) ? "true" : "false") << endl;
-    char rpn[100] = "                ";
+    char rpn[100];
     RPN(str, rpn);
     cout << rpn << endl;
     cout << calc(str) << endl;
+    cout << calc_rpn(str) << endl;
 
     system("pause");
-
+    return 0;
 }

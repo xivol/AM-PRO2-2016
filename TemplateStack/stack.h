@@ -82,12 +82,15 @@ public:
         begin = t;
     }
 
-    void pop()
+    T pop()
     {
-        if (is_empty()) return;
+        if (is_empty()) 
+            throw std::out_of_range("Попытка извлечения из пустого стека!");
         node *t = begin;
         begin = begin->next;
+        T data = t->data;
         delete t;
+        return data;
     }
 
     T top()
