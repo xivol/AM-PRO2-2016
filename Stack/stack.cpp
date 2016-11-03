@@ -4,7 +4,7 @@
 //
 #include "stack.h"
 
-stack::~stack() {}
+astract_stack::~astract_stack() {}
 
 bool d_stack::is_empty()
 {
