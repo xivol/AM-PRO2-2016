@@ -111,6 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="tree.h" />
+    <ClInclude Include="tree_maker.h" />
     <ClInclude Include="tree_iterator.h" />
   </ItemGroup>
   <ItemGroup>

@@ -8,107 +8,76 @@ class tree {
 		node *left, *right;
 	};
 
-    node head;
+	node head = { T(), nullptr, nullptr };
 	node *root;
 
 	node *copy_tree(node* root);
 	void delete_tree(node *root);
+	void print_tree(const node *root, size_t space)
+    {
+        if (root == nullptr) return;
+		print_tree(root->right, space + 1);        
+        for (int i = 0; i < space; i++) std::cout << '\t';
+        std::cout << root->data << std::endl;
+		print_tree(root->left, space + 1);
+    }	
 public:
-    tree() : root(nullptr) 
-    { 
-        head.data = 0xcdcdcdcdcdcdcdcd;
-        head.left = nullptr;
-        head.right = nullptr;
-    }
-	tree(const tree & t);
+    tree() : root(nullptr) { }
+	tree(const tree & t) {
+		copy_tree(t.root);
+	}
 	tree &operator=(const tree & t);
 	//virtual ~tree();
 
 	size_t depth();
 	size_t width();
 
-	void push(const T&x, node*& root) {
-		if (root == nullptr) {
-			root = new node;
-			root->data = x;
-			root->left = nullptr;
-			root->right = nullptr;            
-		}
-		else {
-			if (rand() % 2 == 0)  // вставляем элемент в случайное поддерево
-				push(x, root->left);
-			else
-				push(x, root->right);
-		}
-	}
+
 	void push(const T&x) {
 		push(x, root);
         head.right = root;
 	}
-    void print_tree(const node *root, size_t space)
-    {
-        if (root == nullptr) return;
-        print_tree(root->left, space + 1);
-        for (int i = 0; i < space; i++) std::cout << '\t';
-        std::cout << root->data << std::endl;
-        print_tree(root->right, space + 1);
-    }
+
     void print()
     {
         print_tree(root, 0);
     }
 
-	class iterator {
-	public:
-		enum class direction { Prefix = 0, Infix, Suffix };
-	private:
-		std::stack<node *> prev;
+	class iterator {	
+		std::stack<node *> parents;
 		node *current;
 		const tree *collection;
-		bool full_circle;
-
-		direction dir;
-
-        iterator(const tree *collection, node *cur, direction direct = direction::Infix, bool is_end = false) :
-			collection(collection), dir(direct) 
-        {
+        
+		iterator(const tree *collection, node *current, bool is_end = false) :
+			collection(collection) {
             if (is_end)
-                current = cur;
+                this->current = current;
             else
-			    current = next_top(cur);
-
-		}
-
-		node* next_top(node*cur) 
-        {
-			switch (dir) {
-            case direction::Infix:
-                return next_infix(cur);
-			}
+			    this->current = next_infix(current);
 		}
 
         node* next_infix(node *cur)
         {
             if (cur == nullptr) return nullptr;
             if (cur->right != nullptr) {
-                prev.push(cur);
+                parents.push(cur);
                 cur = cur->right;
                 while (cur->left != nullptr) {
-                    prev.push(cur);
+                    parents.push(cur);
                     cur = cur->left;
                 }
             }
             else {
-                node *t = prev.top();
+                node *t = parents.top();
                 while (cur == t->right) {
                     cur = t;
-                    prev.pop();
-                    if (prev.empty()) break;
-                    t = prev.top();
+                    parents.pop();
+                    if (parents.empty()) break;
+                    t = parents.top();
                 }
-                if (cur->right != t && !prev.empty()) {
+                if (cur->right != t && !parents.empty()) {
                     cur = t;
-                    prev.pop();
+                    parents.pop();
                 }
             }
             return cur;
@@ -120,23 +89,30 @@ public:
 	public :
 
 		iterator &operator++() {
-			current = next_top(current);
+			current = next_infix(current);
 			return *this;
 		}
+
 		T operator*() {
 			return current->data;
 		}
+
+		bool operator== (const iterator & it) {
+			return collection == it.collection && current == it.current;
+		}
+
 		bool operator!= (const iterator & it) {
-			return collection == it.collection &&
-				current != it.current;
+			return !(*this == it);
 		}
 	};
 
 	iterator begin() {
-		return iterator(this, &head, iterator::direction::Infix);
+		return iterator(this, &head);
 	}
 	iterator end() {
-		return iterator(this, & , iterator::direction::Infix, true);
+		return iterator(this, &head, true);
 	}
+
+	friend class tree_maker;
 	
 };
