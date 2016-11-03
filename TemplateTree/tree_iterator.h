@@ -26,7 +26,10 @@ public:
 	tree(const tree & t) {
 		copy_tree(t.root);
 	}
-	tree &operator=(const tree & t);
+	tree &operator=(const tree & t) {
+		delete_tree();
+		copy_tree(t.root);
+	}
 	//virtual ~tree();
 
 	size_t depth();

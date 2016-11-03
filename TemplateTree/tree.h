@@ -2,6 +2,7 @@
 
 template <typename T>
 class tree {
+protected:
 	struct node {
 		T data;
 		node *left, *right;
@@ -9,8 +10,9 @@ class tree {
 
 	node *root;
 
-	node *copy_tree(node* root);
+	node *copy_tree(node *root);
 	void delete_tree(node *root);
+	void print_tree(node *root, std::ostream &os);
 public:
 	tree() : root(nullptr) {}
 	tree(const tree & t);
@@ -19,11 +21,6 @@ public:
 
 	size_t depth();
 	size_t width();
-
-	class iterator {
-		node *stack;
-		iterator(const tree* collection, node *cur);
-	};
 };
 
 template <typename T>

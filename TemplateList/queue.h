@@ -2,7 +2,16 @@
 #include "list.h"
 
 template <typename Datatype>
-class queue {
+class abstract_queue {
+	virtual ~abstract_queue() = 0 {}
+	virtual bool is_empty() const = 0;
+	virtual void push(const Datatype &x) = 0;
+	virtual void pop() = 0;
+	virtual Datatype top() = 0;
+};
+
+template <typename Datatype>
+class queue : public abstract_queue<Datatype>{
 	list<Datatype> data;
 public:
 	bool is_empty() const
