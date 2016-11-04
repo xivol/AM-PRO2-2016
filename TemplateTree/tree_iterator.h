@@ -96,6 +96,13 @@ public:
 			return *this;
 		}
 
+        iterator operator++(int)
+        {
+            iterator it = current;
+            current = next_infix(current);
+            return it;
+        }
+
 		T operator*() {
 			return current->data;
 		}
@@ -116,6 +123,5 @@ public:
 		return iterator(this, &head, true);
 	}
 
-	friend class tree_maker;
-	
+	friend class tree_maker;	
 };
