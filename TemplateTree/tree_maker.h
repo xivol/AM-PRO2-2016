@@ -16,7 +16,7 @@ public:
 	template <typename T>
 	static tree<T> random_tree(const size_t count, const T *source);
     template <typename T>
-    static tree<T> random_tree(const size_t count, T (*source)(void));
+    static tree<T> random_tree(const size_t count, T (*source)(void)); 
     template <typename T>
     static tree<T> random_tree(std::istream &source = std::cin);
     template <typename T>
@@ -56,9 +56,8 @@ bool tree_maker::width_first_insert(typename tree<T>::node *& root, const size_t
         }
     }
     else {
-        bool inserted = width_first_insert(root->left, depth - 1, x);
-        if (!inserted)
-            inserted = width_first_insert(root->right, depth - 1, x);
+        bool inserted = width_first_insert(root->left, depth - 1, x) ||  
+            width_first_insert(root->right, depth - 1, x);
         return inserted;
     }
     return false;
@@ -74,7 +73,7 @@ typename tree<T>::node * tree_maker::balanced_insert(const size_t count, std::is
         t->data = x;
         t->left = balanced_insert<T>(count / 2, source);
         if (count / 2)
-            t->right = balanced_insert<T>(count / 2 - 1, source);
+            t->right = balanced_insert<T>(count - count / 2 - 1, source);
         else
             t->right = nullptr;
         return t;
