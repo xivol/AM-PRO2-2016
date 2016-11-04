@@ -17,6 +17,7 @@ protected:
 	node *copy_tree(node* root);
 	void delete_tree(node *root);
     void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
+    size_t size(const node *root);
     size_t depth(const node *root);
     size_t width(const node *root, const size_t depth);
 public:
@@ -27,6 +28,7 @@ public:
 
     void print(std::ostream &os = std::cout);
 
+    size_t size();
 	size_t depth();
 	size_t width();
 
@@ -93,6 +95,12 @@ void tree<T>::print_tree(std::ostream &os, const node *root, size_t spaces)
 }
 
 template<typename T>
+inline size_t tree<T>::size(const node * root)
+{
+    return root == nullptr ? 0 : size(root->left) + size(root->right) + 1;
+}
+
+template<typename T>
 inline size_t tree<T>::depth(const node * root)
 {
     if (root == nullptr) return 0;
@@ -131,6 +139,12 @@ template <typename T>
 tree<T>::~tree()
 {
     delete_tree(root);
+}
+
+template<typename T>
+inline size_t tree<T>::size()
+{
+    return size(root);
 }
 
 template <typename T>
