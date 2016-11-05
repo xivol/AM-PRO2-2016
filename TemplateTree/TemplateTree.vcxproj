@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bst.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="tree.h" />
     <ClInclude Include="tree_maker.h" />

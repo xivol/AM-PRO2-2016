@@ -1,59 +1,137 @@
 #pragma once
+#include <algorithm>
+#include <iostream>
 
 template <typename T>
-class tree {
+class tree
+{
 protected:
-	struct node {
-		T data;
-		node *left, *right;
-	};
+    struct node
+    {
+        T data;
+        node *left, *right;
+    };
 
-	node *root;
+    node *root;
 
-	node *copy_tree(node *root);
-	void delete_tree(node *root);
-	void print_tree(node *root, std::ostream &os);
+    node *copy_tree(node* root);
+    void delete_tree(node *root);
+    void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
+    size_t size(const node *root);
+    size_t depth(const node *root);
+    size_t width(const node *root, const size_t depth);
 public:
-	tree() : root(nullptr) {}
-	tree(const tree & t);
-	tree &operator=(const tree & t);
-	virtual ~tree();
+    tree() : root(nullptr) {}
+    tree(const tree & t);
+    tree &operator=(const tree & t);
+    virtual ~tree();
 
-	size_t depth();
-	size_t width();
+    void print(std::ostream &os = std::cout);
+
+    size_t size();
+    size_t depth();
+    size_t width();
+
+    friend class tree_maker;
 };
 
 template <typename T>
-class bst : public tree<T> {
-	typedef bool (*comparator)(const T &t1, const T &t2);
-	comparator is_less, is_equal;
-public:
-	bst(comparator less = nullptr, comparator equal = nullptr) :
-	is_less(less), is_equal(equal) {}
-	
-	void insert(const T &t);
-	T &find(const T &t);
-	void remove(const T &t);
-	bool contains(const T &t);
-};
+typename tree<T>::node *tree<T>::copy_tree(node* root)
+{
+    if (root == nullptr) return nullptr;
+    node * t = new node;
+    t->data = root->data;
+    t->left = copy_tree(root->left);
+    t->right = copy_tree(root->right);
+    return t;
+}
 
+template <typename T>
+void tree<T>::delete_tree(node *root)
+{
+    if (root == nullptr) return;
+    delete_tree(root->left);
+    delete_tree(root->right);
+    delete root;
+}
 
-template <typename Key, typename Value>
-struct pair {
-	Key key;
-	Value value;
-};
+template <typename T>
+void tree<T>::print_tree(std::ostream &os, const node *root, size_t spaces)
+{
+    if (root == nullptr) return;
+    print_tree(os, root->right, spaces + 1);
+    for (int i = 0; i < spaces; i++) os << '\t';
+    os << root->data << std::endl;
+    print_tree(os, root->left, spaces + 1);
+}
 
-template <typename Key, typename Value>
-class map : public bst<pair<Key, Value>> {
-	typedef pair<Key, Value> pair;
-	static bool key_less(const pair &p1, const pair &p2) {
-		return p1.key < p2.key;
-	}
-	static bool key_equal(const pair &p1, const pair &p2) {
-		return p1.key == p2.key;
-	}
-public:
-	map() :bst(&key_less, &key_equal) {}
-};
+template<typename T>
+inline size_t tree<T>::size(const node * root)
+{
+    return root == nullptr ? 0 : size(root->left) + size(root->right) + 1;
+}
 
+template<typename T>
+inline size_t tree<T>::depth(const node * root)
+{
+    if (root == nullptr) return 0;
+    return std::max(depth(root->left), depth(root->right)) + 1;
+}
+
+template<typename T>
+inline size_t tree<T>::width(const node * root, const size_t depth)
+{
+    if (root == nullptr) return 0;
+    if (depth == 1) return 1;
+    return width(root->right, depth - 1) + width(root->left, depth - 1);
+
+}
+
+template <typename T>
+void tree<T>::print(std::ostream &os)
+{
+    print_tree(os, this->root);
+}
+
+template <typename T>
+tree<T>::tree(const tree & t)
+{
+    root = copy_tree(t.root);
+}
+
+template <typename T>
+tree<T> &tree<T>::operator=(const tree & t)
+{
+    delete_tree(root);
+    root = copy_tree(t.root);
+}
+
+template <typename T>
+tree<T>::~tree()
+{
+    delete_tree(root);
+}
+
+template<typename T>
+inline size_t tree<T>::size()
+{
+    return size(root);
+}
+
+template <typename T>
+size_t tree<T>::depth()
+{
+    return depth(root);
+}
+
+template <typename T>
+size_t tree<T>::width()
+{
+    size_t d = depth();
+    size_t max_w = 0;
+    while (d) {
+        max_w = std::max(max_w, width(root, d));
+        --d;
+    }
+    return max_w;
+}

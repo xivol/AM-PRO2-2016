@@ -6,6 +6,7 @@ int main()
 {
     tree<int> t = tree_maker::balanced_tree<int>(10);
     t.print();
+    std::cout << *t.find(0);
     auto it1 = t.rbegin();
     auto it2 = t.begin();
 	while(it2!=t.end()){

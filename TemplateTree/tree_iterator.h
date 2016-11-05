@@ -17,9 +17,11 @@ protected:
 	node *copy_tree(node* root);
 	void delete_tree(node *root);
     void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
+    void super_root_init();
     size_t size(const node *root);
     size_t depth(const node *root);
     size_t width(const node *root, const size_t depth);
+    node *find_tree(const T &x, const node *root);
 public:
     tree() : root(nullptr) { }
     tree(const tree & t);
@@ -56,21 +58,22 @@ public:
         friend class tree;
 	};
 
-	iterator begin() {
-        super_root.right = root;
+	iterator begin() 
+    {
         return iterator(this);	
     }
 
     iterator rbegin()
     {
-        super_root.left = root;
         return iterator(this,false);
     }
 
-	iterator end() { 
-        super_root.right = root;
+	iterator end() 
+    { 
         return iterator(this, &super_root);	
     }
+
+    iterator find(const T &x);
 
     friend class tree_maker;
 };
@@ -137,6 +140,7 @@ template <typename T>
 tree<T>::tree(const tree & t)
 {
     root = copy_tree(t.root);
+    super_root_init();
 }
 
 template <typename T>
@@ -222,7 +226,7 @@ typename tree<T>::node *tree<T>::iterator::next_infix(node *cur)
 template<typename T>
 typename tree<T>::node * tree<T>::iterator::prev_infix(node * cur)
 {
-    if (cur == nullptr) return nullptr;
+    if (cur == nullptr) return nullptr;            
     if (!parents.is_empty() && cur == parents.top())
         parents.pop();
     if (cur->left != nullptr) {
@@ -300,4 +304,26 @@ std::ostream &operator<<(std::ostream &os, const tree<P> &t)
 {
     t.print(os);
     return os;
+}
+
+template<typename T>
+typename tree<T>::iterator tree<T>::find(const T & x)
+{
+    return iterator(this, find_tree(x, root));
+}
+
+template<typename T>
+typename tree<T>::node * tree<T>::find_tree(const T & x, const node *root)
+{
+    if (root == nullptr) return nullptr;    
+    if (node *t = find_tree(x, root->left)) return t;
+    if (root->data == x) return const_cast<node*>(root);
+    return find_tree(x, root->right);
+}
+
+template<typename T>
+inline void tree<T>::super_root_init()
+{
+    super_root.left = root;
+    super_root.right = root; 
 }
