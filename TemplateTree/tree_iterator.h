@@ -37,12 +37,17 @@ public:
 		node *current;
 		const tree *collection;
         
-        iterator(const tree *collection, node *current, bool find_start = true);
-        node* next_infix(node *cur);		
+        iterator(const tree *collection, node *current);
+        iterator(const tree *collection, bool begin = true);
+        node* next_infix(node *cur);
+        node* prev_infix(node *cur);       
 	public :
 
-        iterator &operator++();
+        iterator &operator++();        
         iterator operator++(int);
+
+        iterator &operator--();
+        iterator &operator--(int);
 
         T operator*();
 
@@ -53,12 +58,18 @@ public:
 
 	iterator begin() {
         super_root.right = root;
-        return iterator(this, &super_root);	
+        return iterator(this);	
+    }
+
+    iterator rbegin()
+    {
+        super_root.left = root;
+        return iterator(this,false);
     }
 
 	iterator end() { 
         super_root.right = root;
-        return iterator(this, &super_root, false);	
+        return iterator(this, &super_root);	
     }
 
     friend class tree_maker;
@@ -166,13 +177,18 @@ size_t tree<T>::width()
 }
 
 template <typename T>
-tree<T>::iterator::iterator(const tree *collection, node *current, bool find_start = true) :
+tree<T>::iterator::iterator(const tree *collection, node *current) :
+    collection(collection),current(current)
+{}
+
+template <typename T>
+tree<T>::iterator::iterator(const tree *collection, bool begin) :
     collection(collection)
 {
-    if (find_start)
-        this->current = next_infix(current);
-    else        
-        this->current = current;
+    if (begin)
+        this->current = next_infix(const_cast<node*>(&this->collection->super_root));
+    else
+        this->current = prev_infix(const_cast<node*>(&this->collection->super_root));
 }
 
 template <typename T>
@@ -203,6 +219,33 @@ typename tree<T>::node *tree<T>::iterator::next_infix(node *cur)
     return cur;
 }
 
+template<typename T>
+typename tree<T>::node * tree<T>::iterator::prev_infix(node * cur)
+{
+    if (cur == nullptr) return nullptr;
+    if (!parents.is_empty() && cur == parents.top())
+        parents.pop();
+    if (cur->left != nullptr) {
+        parents.push(cur);
+        cur = cur->left;
+        while (cur->right != nullptr) {
+            parents.push(cur);
+            cur = cur->right;
+        }
+        return cur;
+    }
+    else {
+        node* t = parents.top();
+        while (cur == t->left) {
+            cur = t;
+            parents.pop();
+            if (parents.is_empty()) break;
+            t = parents.top();
+        }
+        return t;
+    }
+}
+
 template <typename T>
 typename tree<T>::iterator &tree<T>::iterator::operator++()
 {
@@ -218,9 +261,25 @@ typename tree<T>::iterator tree<T>::iterator::operator++(int)
     return it;
 }
 
+template<typename T>
+typename tree<T>::iterator & tree<T>::iterator::operator--()
+{
+    current = prev_infix(current);
+    return *this;
+}
+
+template<typename T>
+typename tree<T>::iterator & tree<T>::iterator::operator--(int)
+{
+    iterator it = *this;
+    current = prev_infix(current);
+    return it;
+}
+
 template <typename T>
 T tree<T>::iterator::operator*()
 {
+    //std::cout << std::endl << parents << std::endl;
     return current->data;
 }
 

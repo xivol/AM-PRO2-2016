@@ -122,8 +122,8 @@ std::ostream &operator<<(std::ostream &os, const stack<P> &s)
 {
     stack<P>::node *t = s.begin;
     while (t != nullptr) {
-        std::cout << t->data << ' ';
+        os << t->data << ' ';
         t = t->next;
     }
-    std::cout << std::endl;
+    return os;
 }
