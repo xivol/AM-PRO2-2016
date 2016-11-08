@@ -13,15 +13,17 @@ protected:
 
     node super_root = { T(), nullptr, nullptr };
 	node *root;
-
-	node *copy_tree(node* root);
-	void delete_tree(node *root);
-    void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
     void super_root_init();
-    size_t size(const node *root);
-    size_t depth(const node *root);
-    size_t width(const node *root, const size_t depth);
-    node *find_tree(const T &x, const node *root);
+
+
+	static node *copy_tree(node* root);
+	static void delete_tree(node *root);
+    static void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);      
+    static size_t size(const node *root);
+    static size_t depth(const node *root);
+    static size_t width(const node *root, const size_t depth);
+    static node *find_tree(const T &x, const node *root);
+    static bool equals_tree(const node *root1, const node *root2);
 public:
     tree() : root(nullptr) { }
     tree(const tree & t);
@@ -33,6 +35,9 @@ public:
     size_t size();
 	size_t depth();
 	size_t width();
+
+    bool operator==(const tree &t);
+    bool operator!=(const tree &t);
 
     class iterator {	
 		stack<node *> parents;
@@ -76,6 +81,7 @@ public:
     iterator find(const T &x);
 
     friend class tree_maker;
+    template <typename P> friend class test_tree;
 };
 
 template <typename T>
@@ -313,12 +319,36 @@ typename tree<T>::iterator tree<T>::find(const T & x)
 }
 
 template<typename T>
+inline bool tree<T>::operator==(const tree & t)
+{
+    return equals_tree(root, t.root);
+}
+
+template<typename T>
+inline bool tree<T>::operator!=(const tree & t)
+{
+    return !operator==(t);
+}
+
+template<typename T>
 typename tree<T>::node * tree<T>::find_tree(const T & x, const node *root)
 {
     if (root == nullptr) return nullptr;    
     if (node *t = find_tree(x, root->left)) return t;
     if (root->data == x) return const_cast<node*>(root);
     return find_tree(x, root->right);
+}
+
+template<typename T>
+bool tree<T>::equals_tree(const node *root1, const node *root2)
+{
+    if (root1 == root2) return true;
+    if (root1 == nullptr && root2 == nullptr) return true;
+    if (root1!=nullptr && root2!=nullptr)
+        if (root1->data == root2->data)
+            return equals_tree(root1->right, root2->right) &&
+            equals_tree(root1->left, root2->left);
+    return false;
 }
 
 template<typename T>

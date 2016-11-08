@@ -1,9 +1,11 @@
 #include <iostream>
 #include "tree_iterator.h"
+#include "test_tree.h"
 #include "tree_maker.h"
 
 int main()
 {
+    test_tree<int>::run();
     tree<int> t = tree_maker::balanced_tree<int>(10);
     t.print();
     std::cout << *t.find(0);

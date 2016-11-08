@@ -14,12 +14,13 @@ protected:
 
     node *root;
 
-    node *copy_tree(node* root);
-    void delete_tree(node *root);
-    void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
-    size_t size(const node *root);
-    size_t depth(const node *root);
-    size_t width(const node *root, const size_t depth);
+    static node *copy_tree(node* root);
+    static void delete_tree(node *root);
+    static void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
+    static size_t size(const node *root);
+    static size_t depth(const node *root);
+    static size_t width(const node *root, const size_t depth);
+    static bool equals_tree(const node *root1, const node *root2);
 public:
     tree() : root(nullptr) {}
     tree(const tree & t);
@@ -32,7 +33,11 @@ public:
     size_t depth();
     size_t width();
 
+    bool operator==(const tree &t);
+    bool operator!=(const tree &t);
+
     friend class tree_maker;
+    template <typename P> friend class test_tree;
 };
 
 template <typename T>
