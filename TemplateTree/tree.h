@@ -52,16 +52,16 @@ public:
     size_t width();
 
     // ќпераци€ сравнени€ деревьев на равенство
-    bool operator==(const tree &t);
+    bool operator==(const tree<T> &t);
     // ќпераци€ сравнени€ деревьев на неравенство
-    bool operator!=(const tree &t);
+    bool operator!=(const tree<T> &t);
 
     //  ласс дл€ создани€ двоичных деревьев
     // с заданной структурой
     friend class tree_maker;
+
     // “естирующий класс
-    template <typename P>
-    friend class test_tree<P>;
+    template <typename P> friend class test_tree;
 };
 
 template <typename T>
@@ -93,4 +93,15 @@ void tree<T>::print_tree(std::ostream &os, const node *root, size_t spaces)
     for (int i = 0; i < spaces; i++) os << '\t';
     os << root->data << std::endl;
     print_tree(os, root->left, spaces + 1);
+}
+
+template<typename T>
+bool tree<T>::equals_tree(const node *first, const node *second)
+{
+    if (first == second) return true;
+    if (first != nullptr && second != nullptr)
+        if (first->data == second->data)
+            return equals_tree(first->right, second->right) &&
+            equals_tree(first->left, second->left);
+    return false;
 }

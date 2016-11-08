@@ -90,7 +90,7 @@ typename tree<T>::node *tree<T>::copy_tree(node* root)
     if (root == nullptr) return nullptr;
     node * t = new node;
     t->data = root->data;
-    t->left = copy_tree(root->left);
+    t->left = tree<T>::copy_tree(root->left);
     t->right = copy_tree(root->right);
     return t;
 }
