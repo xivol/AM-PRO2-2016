@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClInclude Include="bst.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="test_tree.h" />
     <ClInclude Include="tree.h" />
     <ClInclude Include="tree_maker.h" />
     <ClInclude Include="tree_iterator.h" />
