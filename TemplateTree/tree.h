@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №18. Абстрактные типы данных. Двоичное дерево
+// tree.h
+//
 #pragma once
 #include <algorithm>
 #include <iostream>
@@ -57,7 +61,6 @@ public:
     bool operator!=(const tree<T> &t);
 
     // Класс для создания двоичных деревьев
-    // с заданной структурой
     friend class tree_maker;
 
     // Тестирующий класс

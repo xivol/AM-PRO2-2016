@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №18. Абстрактные типы данных. Двоичное дерево
+// test_tree.h
+//
 #pragma once
 #include <cassert>
 #include <iostream>
@@ -13,6 +17,7 @@ class test_tree
     // Метод получения массива узлов, связанных в дерево
     static array_tree get_tree(const T *data, const size_t size);    
     
+    // Метод получения тестовых данных
     static T *get_test_data(const size_t size);
 
     // Тест для copy_tree
@@ -70,8 +75,9 @@ T *test_tree<T>::get_test_data(const size_t size)
     /* Не известно как получить массив произвольного типа.
        Мы полагаемся на специализацию метода для каждого отдельно взятого типа 
     */
-    return nullptr;
+    throw std::runtime_error("Метод не реализован для указанного типа");
 }
+
 // Специализация шаблона для типа int
 template<> int *test_tree<int>::get_test_data(const size_t size)
 {

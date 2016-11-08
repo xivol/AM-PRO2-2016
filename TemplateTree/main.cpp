@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №18. Абстрактные типы данных. Двоичное дерево
+// main.cpp
+//
 #include <iostream>
 #include "tree.h"
 #include "test_tree.h"

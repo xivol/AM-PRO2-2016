@@ -1,15 +1,21 @@
+//
+// Ћабораторна€ работа є18. јбстрактные типы данных. ƒвоичное дерево
+// tree_maker.h
+//
 #pragma once
 #include <iostream>
 #include "tree.h"
 
 //  ласс создающий деревь€ заданной структуры
-class tree_maker {
+class tree_maker 
+{
     // –екурсивный метод вставки в случайное поддерево
 	template <typename T>
 	static void random_insert(typename tree<T>::node *&root, const T &x);
 public:
-    // ћетод заполн€ющий дерево заданным количеством элементов 
-    // из указаного потока ввода в случайном пор€дке
+
+    // ћетод заполн€ющий дерево в случайном пор€дке
+    // заданным количеством элементов из указаного потока ввода 
 	template <typename T> 
 	static tree<T> random_tree(const size_t count, std::istream &source = std::cin);
 };
