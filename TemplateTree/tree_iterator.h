@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №19. Абстрактные типы данных. Двоичное дерево с итератором
+// tree_iterator.h
+//
 #pragma once
 #include "stack.h"
 #include <algorithm>
@@ -71,14 +75,16 @@ public:
 		// Конструктор от начала/конца коллекции
         iterator(const tree *collection, bool reverse_begin = false);
 		// Получение следующего за current узла в дереве
-        node* next_infix();     
+        node* next_infix();
+		// Получение идущего перед current узла в дереве
+		node* prev_infix();
 	public :
 		
 		// Переход на следующий узел
         iterator &operator++();        
         iterator operator++(int);
 
-		// Переход на предидущий узел
+		// Переход на предыдущий узел
         iterator &operator--();
         iterator &operator--(int);
 
@@ -179,11 +185,11 @@ typename tree<T>::node *tree<T>::iterator::next_infix()
 	node *cur = current;
 	// Если у текущего узла есть правое поддерево
     if (cur->right != nullptr) {
-        parents.push(cur); // запоминаем путь
+        parents.push(cur);  // запоминаем путь
         cur = cur->right;
 		// Переходим в самый левый узел
         while (cur->left != nullptr) {
-            parents.push(cur); // запоминаем путь
+            parents.push(cur);  // запоминаем путь
             cur = cur->left;
         }
     }
@@ -194,12 +200,12 @@ typename tree<T>::node *tree<T>::iterator::next_infix()
 		// Если мы справа от предка, нужно подднятся вверх по дереву
         while (cur == t->right) {
             cur = t;
-            parents.pop();
+            parents.pop();  // извлекаем предка
             if (parents.is_empty()) break;
             t = parents.top();
         }
-		// Обрабатываем особый случай
-        if (cur->right != t && !parents.is_empty()) {
+		// Если не вышли за конец дерева
+        if (!parents.is_empty()) {
             cur = t;
             parents.pop();
         }
