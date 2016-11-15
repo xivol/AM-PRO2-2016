@@ -11,7 +11,7 @@ protected:
 		node *left, *right;
 	};
 
-    node super_root = { T(), nullptr, nullptr };
+    node super_root = { T(111), nullptr, nullptr };
 	node *root;
     void super_root_init();
 
@@ -221,7 +221,7 @@ typename tree<T>::node *tree<T>::iterator::next_infix(node *cur)
             if (parents.is_empty()) break;
             t = parents.top();
         }
-        if (cur->right != t && !parents.is_empty()) {
+        if ( !parents.is_empty()) {
             cur = t;
             parents.pop();
         }
