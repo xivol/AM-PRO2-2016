@@ -21,6 +21,9 @@
     <ClInclude Include="crtdynmem.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="array_exception.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dyn_array.cpp">
@@ -29,8 +32,5 @@
     <ClCompile Include="main.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md" />
   </ItemGroup>
 </Project>

@@ -1,69 +1,42 @@
-//
-// Лабораторная работа №18. Абстрактные типы данных. Двоичное дерево
-// tree.h
-//
 #pragma once
 #include <algorithm>
 #include <iostream>
 
-// Шаблон класса двоичное дерево
 template <typename T>
 class tree
 {
-    // Узел дерева
+protected:
     struct node
     {
-        // Тип данных в узле дерева
         T data;
-        // Указатели на левое и правое поддеревья
         node *left, *right;
     };
 
-    // Корень дерева
     node *root;
 
-    // Рекурсивный метод копирования данных из дерева
     static node *copy_tree(node* root);
-
-    // Рекурсивный метод освобождения памяти для дерева
     static void delete_tree(node *root);
-
-    // Рекурсивный метод вывода данных в указанный поток в виде дерева
-    static void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);   
-
-    // Рекурсивный метод сравнения деревьев на равенство
-    static bool equals_tree(const node *first, const node *second);
+    static void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
+    static size_t size(const node *root);
+    static size_t depth(const node *root);
+    static size_t width(const node *root, const size_t depth);
+    static bool equals_tree(const node *root1, const node *root2);
 public:
-    // Конструктор по умолчанию
     tree() : root(nullptr) {}
-    // Конструктор копирования
     tree(const tree & t);
-    // Операция присваивания
     tree &operator=(const tree & t);
-    // Деструктор
-    ~tree();
+    virtual ~tree();
 
-    // Функция вывода в указанный поток
     void print(std::ostream &os = std::cout);
 
-    // Количество узлов дерева
     size_t size();
-    
-    // Глубина дерева
     size_t depth();
-
-    // Ширина дерева
     size_t width();
 
-    // Операция сравнения деревьев на равенство
-    bool operator==(const tree<T> &t);
-    // Операция сравнения деревьев на неравенство
-    bool operator!=(const tree<T> &t);
+    bool operator==(const tree &t);
+    bool operator!=(const tree &t);
 
-    // Класс для создания двоичных деревьев
     friend class tree_maker;
-
-    // Тестирующий класс
     template <typename P> friend class test_tree;
 };
 
@@ -85,7 +58,6 @@ void tree<T>::delete_tree(node *root)
     delete_tree(root->left);
     delete_tree(root->right);
     delete root;
-    root = nullptr;
 }
 
 template <typename T>
@@ -99,12 +71,72 @@ void tree<T>::print_tree(std::ostream &os, const node *root, size_t spaces)
 }
 
 template<typename T>
-bool tree<T>::equals_tree(const node *first, const node *second)
+inline size_t tree<T>::size(const node * root)
 {
-    if (first == second) return true;
-    if (first != nullptr && second != nullptr)
-        if (first->data == second->data)
-            return equals_tree(first->right, second->right) &&
-            equals_tree(first->left, second->left);
-    return false;
+    return root == nullptr ? 0 : size(root->left) + size(root->right) + 1;
+}
+
+template<typename T>
+inline size_t tree<T>::depth(const node * root)
+{
+    if (root == nullptr) return 0;
+    return std::max(depth(root->left), depth(root->right)) + 1;
+}
+
+template<typename T>
+inline size_t tree<T>::width(const node * root, const size_t depth)
+{
+    if (root == nullptr) return 0;
+    if (depth == 1) return 1;
+    return width(root->right, depth - 1) + width(root->left, depth - 1);
+
+}
+
+template <typename T>
+void tree<T>::print(std::ostream &os)
+{
+    print_tree(os, this->root);
+}
+
+template <typename T>
+tree<T>::tree(const tree & t)
+{
+    root = copy_tree(t.root);
+}
+
+template <typename T>
+tree<T> &tree<T>::operator=(const tree & t)
+{
+    delete_tree(root);
+    root = copy_tree(t.root);
+}
+
+template <typename T>
+tree<T>::~tree()
+{
+    delete_tree(root);
+}
+
+template<typename T>
+inline size_t tree<T>::size()
+{
+    return size(root);
+}
+
+template <typename T>
+size_t tree<T>::depth()
+{
+    return depth(root);
+}
+
+template <typename T>
+size_t tree<T>::width()
+{
+    size_t d = depth();
+    size_t max_w = 0;
+    while (d) {
+        max_w = std::max(max_w, width(root, d));
+        --d;
+    }
+    return max_w;
 }

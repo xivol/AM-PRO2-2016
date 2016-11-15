@@ -3,6 +3,8 @@
 // dyn_array.h
 //
 #pragma once
+#include <exception>
+#include <iostream>
 #include "crtdynmem.h"
 
 class dyn_array
@@ -67,5 +69,15 @@ private:
 
     // Функция чтения данных из текстового файла
     void text_init(const char *filename);
+
+public:
+	class array_exception : public std::exception {
+	};
+	class size_exception : public array_exception {
+	};
+	class index_exception : public array_exception {
+	};
+	class file_exception :public array_exception {
+	};
 };
 

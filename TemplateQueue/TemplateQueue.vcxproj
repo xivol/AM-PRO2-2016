@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BE4E1ED6-DDBF-4CCD-B456-EC1821DA1720}</ProjectGuid>
-    <RootNamespace>Stack</RootNamespace>
+    <ProjectGuid>{011FA155-1995-411D-8907-3449BCEECA2D}</ProjectGuid>
+    <RootNamespace>TemplateQueue</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,17 +118,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="crtdynmem.h" />
-    <ClInclude Include="dyn_array.h" />
-    <ClInclude Include="stack.h" />
-    <ClInclude Include="test_d_stack.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="dyn_array.cpp" />
-    <ClCompile Include="l_stack.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="stack.cpp" />
-    <ClCompile Include="test_d_stack.cpp" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,3 +1,4 @@
+#include "..\Polymorph\triangle.h"
 #include "triangle.h"
 #include <cmath>
 #include <iostream>
@@ -12,6 +13,12 @@ triangle::triangle(const point & a, const point & b, const point & c)
     this->a = a;
     this->b = b;
     this->c = c;
+}
+
+triangle & triangle::operator=(const triangle & t)
+{
+    polygon::operator=(t);
+    return *this;
 }
 
 point triangle::get_a() const

@@ -15,34 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="tree.h">
+    <ClInclude Include="queue.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="tree_iterator.h">
+    <ClInclude Include="list.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="tree_maker.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="stack.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="bst.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="test_tree.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="test_tree_iterator.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md" />
   </ItemGroup>
 </Project>

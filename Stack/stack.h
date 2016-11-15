@@ -7,14 +7,11 @@
 #include "dyn_array.h"
 
 // Абстрактный стек
-class astract_stack 
+class stack 
 {
 public:
-	// Тип данных в стеке
     typedef int datatype;
-
-	// Виртуальный деструктор
-    virtual ~astract_stack() = 0;
+    virtual ~stack() = 0;
 
     // Проверка на пустоту
     virtual bool is_empty() = 0;
@@ -30,7 +27,7 @@ public:
 };
 
 // Стек на базе массива
-class d_stack : public astract_stack
+class d_stack : public stack
 {
     dyn_array data;
 public:
@@ -47,7 +44,7 @@ public:
 };
 
 // Стек на базе списка
-class l_stack : public astract_stack
+class l_stack : public stack
 {
     // Узел списка
     struct node
@@ -58,6 +55,12 @@ class l_stack : public astract_stack
 
     // Начало списка
     node *begin;
+
+    // Удаление списка
+    void delete_list();
+
+    // Копирование списка
+    void copy_list(const node* l);
 public:
     l_stack();
 

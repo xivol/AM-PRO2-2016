@@ -21,9 +21,6 @@
     <ClInclude Include="test_list.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="crtdynmem.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="list.cpp">
@@ -35,8 +32,5 @@
     <ClCompile Include="test_list.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md" />
   </ItemGroup>
 </Project>

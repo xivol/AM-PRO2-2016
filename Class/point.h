@@ -13,6 +13,8 @@ private:
 public:
     point();
     point(double x, double y);
+    point(const point &p);
+    ~point();
     
     double get_x() const;
     double get_y() const;
@@ -21,7 +23,6 @@ public:
     double distance_to(const point &start, const point &finish) const;
 
     friend class test_point;
-    friend point get_point();
 };
 
 point get_point();

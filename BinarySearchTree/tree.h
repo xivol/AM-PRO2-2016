@@ -1,31 +1,34 @@
 #pragma once
-#include "stack.h"
 #include <algorithm>
 #include <iostream>
+#include "stack.h"
 
 template <typename T>
-class tree {
+class tree
+{
 protected:
-	struct node {
-		T data;
-		node *left, *right;
-	};
+    struct node
+    {
+        T data;
+        node *left, *right;
+    };
 
-    node super_root = { T(111), nullptr, nullptr };
-	node *root;
+    node super_root = { T(), nullptr, nullptr };
+    node *root;
     void super_root_init();
 
-
-	static node *copy_tree(node* root);
-	static void delete_tree(node *root);
-    static void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);      
+    class iterator;
+    static node *copy_tree(node* root);
+    static void delete_tree(node *root);
+    static void print_tree(std::ostream &os, const node *root, const size_t spaces = 0);
     static size_t size(const node *root);
     static size_t depth(const node *root);
     static size_t width(const node *root, const size_t depth);
     static node *find_tree(const T &x, const node *root);
     static bool equals_tree(const node *root1, const node *root2);
+    iterator make_iter(node *t);
 public:
-    tree() : root(nullptr) { }
+    tree() : root(nullptr) {}
     tree(const tree & t);
     tree &operator=(const tree & t);
     virtual ~tree();
@@ -33,24 +36,25 @@ public:
     void print(std::ostream &os = std::cout);
 
     size_t size();
-	size_t depth();
-	size_t width();
+    size_t depth();
+    size_t width();
 
     bool operator==(const tree &t);
     bool operator!=(const tree &t);
 
-    class iterator {	
-		stack<node *> parents;
-		node *current;
-		const tree *collection;
-        
+    class iterator
+    {
+        stack<node *> parents;
+        node *current;
+        const tree *collection;
+
         iterator(const tree *collection, node *current);
         iterator(const tree *collection, bool begin = true);
         node* next_infix(node *cur);
-        node* prev_infix(node *cur);       
-	public :
+        node* prev_infix(node *cur);
+    public:
 
-        iterator &operator++();        
+        iterator &operator++();
         iterator operator++(int);
 
         iterator &operator--();
@@ -61,21 +65,21 @@ public:
         bool operator== (const iterator & it);
         bool operator!= (const iterator & it);
         friend class tree;
-	};
+    };
 
-	iterator begin() 
+    iterator begin()
     {
-        return iterator(this);	
+        return iterator(this);
     }
 
     iterator rbegin()
     {
-        return iterator(this,false);
+        return iterator(this, false);
     }
 
-	iterator end() 
-    { 
-        return iterator(this, &super_root);	
+    iterator end()
+    {
+        return iterator(this, &super_root);
     }
 
     iterator find(const T &x);
@@ -129,10 +133,10 @@ inline size_t tree<T>::depth(const node * root)
 
 template<typename T>
 inline size_t tree<T>::width(const node * root, const size_t depth)
-{   
+{
     if (root == nullptr) return 0;
-    if (depth == 1) return 1;    
-    return width(root->right, depth-1) + width(root->left, depth-1);
+    if (depth == 1) return 1;
+    return width(root->right, depth - 1) + width(root->left, depth - 1);
 
 }
 
@@ -188,8 +192,17 @@ size_t tree<T>::width()
 
 template <typename T>
 tree<T>::iterator::iterator(const tree *collection, node *current) :
-    collection(collection),current(current)
-{}
+    collection(collection), current(current)
+{
+    if (current == nullptr)
+        this->current = const_cast<node*>(&this->collection->super_root);
+    else {
+        node *t = const_cast<node*>(&this->collection->super_root);
+        while (t != current)
+            t = next_infix(t);
+    }
+
+}
 
 template <typename T>
 tree<T>::iterator::iterator(const tree *collection, bool begin) :
@@ -204,7 +217,8 @@ tree<T>::iterator::iterator(const tree *collection, bool begin) :
 template <typename T>
 typename tree<T>::node *tree<T>::iterator::next_infix(node *cur)
 {
-    if (cur == nullptr) return nullptr;
+    if (cur == nullptr)
+        return nullptr;
     if (cur->right != nullptr) {
         parents.push(cur);
         cur = cur->right;
@@ -215,13 +229,13 @@ typename tree<T>::node *tree<T>::iterator::next_infix(node *cur)
     }
     else {
         node *t = parents.top();
-        while (cur == t->right) {
+        while (cur == t->right || t == &collection->super_root) {
             cur = t;
             parents.pop();
             if (parents.is_empty()) break;
             t = parents.top();
         }
-        if ( !parents.is_empty()) {
+        if (cur->right != t && !parents.is_empty()) {
             cur = t;
             parents.pop();
         }
@@ -232,7 +246,7 @@ typename tree<T>::node *tree<T>::iterator::next_infix(node *cur)
 template<typename T>
 typename tree<T>::node * tree<T>::iterator::prev_infix(node * cur)
 {
-    if (cur == nullptr) return nullptr;            
+    if (cur == nullptr) return nullptr;
     if (!parents.is_empty() && cur == parents.top())
         parents.pop();
     if (cur->left != nullptr) {
@@ -246,7 +260,7 @@ typename tree<T>::node * tree<T>::iterator::prev_infix(node * cur)
     }
     else {
         node* t = parents.top();
-        while (cur == t->left) {
+        while (cur == t->left || t == &collection->super_root) {
             cur = t;
             parents.pop();
             if (parents.is_empty()) break;
@@ -333,7 +347,7 @@ inline bool tree<T>::operator!=(const tree & t)
 template<typename T>
 typename tree<T>::node * tree<T>::find_tree(const T & x, const node *root)
 {
-    if (root == nullptr) return nullptr;    
+    if (root == nullptr) return nullptr;
     if (node *t = find_tree(x, root->left)) return t;
     if (root->data == x) return const_cast<node*>(root);
     return find_tree(x, root->right);
@@ -344,7 +358,7 @@ bool tree<T>::equals_tree(const node *root1, const node *root2)
 {
     if (root1 == root2) return true;
     if (root1 == nullptr && root2 == nullptr) return true;
-    if (root1!=nullptr && root2!=nullptr)
+    if (root1 != nullptr && root2 != nullptr)
         if (root1->data == root2->data)
             return equals_tree(root1->right, root2->right) &&
             equals_tree(root1->left, root2->left);
@@ -352,8 +366,14 @@ bool tree<T>::equals_tree(const node *root1, const node *root2)
 }
 
 template<typename T>
+inline typename tree<T>::iterator tree<T>::make_iter(node * t)
+{
+    return iterator(this, t);
+}
+
+template<typename T>
 inline void tree<T>::super_root_init()
 {
     super_root.left = root;
-    super_root.right = root; 
+    super_root.right = root;
 }

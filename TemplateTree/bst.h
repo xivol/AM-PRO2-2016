@@ -1,18 +1,19 @@
 #pragma once
-#include "tree_iterator.h"
+#include "tree.h"
 
 template <typename T>
 class bst : public tree<T>
 {
-protected:
-	node *insert_tree(node *&root, const T &x);
-	node *&find_tree(node *&root, const T &x);
-	void remove_tree(node *root, const T &x);
-	node *leftmost_right(node *root);
+    typedef bool(*comparator)(const T &t1, const T &t2);
+    comparator is_less, is_equal;
 public:
-    iterator insert(const T &t);
-    iterator find(const T &t);
-	iterator find_insert(const T &t);
+    bst(comparator less = nullptr, comparator equal = nullptr) :
+        is_less(less), is_equal(equal)
+    {
+    }
+
+    void insert(const T &t);
+    T &find(const T &t);
     void remove(const T &t);
     bool contains(const T &t);
 };
@@ -26,29 +27,17 @@ struct pair
 };
 
 template <typename Key, typename Value>
-class priority_queue : public bst<pair<Key, Value>>
+class map : public bst<pair<Key, Value>>
 {
-	Key default_priority = { 0 }
+    typedef pair<Key, Value> pair;
+    static bool key_less(const pair &p1, const pair &p2)
+    {
+        return p1.key < p2.key;
+    }
+    static bool key_equal(const pair &p1, const pair &p2)
+    {
+        return p1.key == p2.key;
+    }
 public:
-	priority_queue() {}
-	priority_queue(const Key &default);
-	void push(const Value &x) {
-		push(x, default_priority);
-	}
-	void push(const Value &x, const Key &priority);
-	Value pop();
-	Value top();
-	bool is_empty() {
-		return tree<pair<Key, Value>>::size() == 0;
-	}
+    map() :bst(&key_less, &key_equal) {}
 };
-
-template <typename Key, typename Value>
-bool operator==(const pair<Key, Value> &p1, const pair<Key, Value> &p2) {
-	return p1.key == p2.key;
-}
-
-template <typename Key, typename Value>
-bool operator!=(const pair<Key, Value> &p1, const pair<Key, Value> &p2) {
-	return p1.key != p2.key;
-}
