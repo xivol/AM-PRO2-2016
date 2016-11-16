@@ -8,10 +8,10 @@ class bst : public tree<T>
 protected:
     typedef  tree<T>::node node;
     node *insert_tree(node *&root, const T &x);
-    node *&find_tree(node *&root, const T &x);
+    node *&find_tree(node *& const root, const T &x) const;
     void remove_tree(node *&root);
-    node *&leftmost(node *&root);
-    node *&rightmost(node *&root);    
+    node *&leftmost(node *const&  root) const;
+    node *&rightmost(node *const&  root) const;
 public:
 	bst() {}
 	bst(const bst& t) :tree<T>(t) {}
@@ -52,7 +52,6 @@ public:
     void remove(const T &x)
     {
         remove_tree(find_tree(root, x));
-        super_root_init();
     }
 };
 
@@ -74,7 +73,7 @@ typename bst<T>::node * bst<T>::insert_tree(node *& root, const T & x)
 
 
 template<typename T>
-typename bst<T>::node *& bst<T>::find_tree(tree<T>::node *& root, const T & x)
+typename bst<T>::node *& bst<T>::find_tree(tree<T>::node *& const root, const T & x) const
 {
     if (root == nullptr) return root;
     if (root->data == x) return root;
@@ -96,7 +95,6 @@ inline void bst<T>::remove_tree(tree<T>::node *&root)
             t = root->right;
         delete root;
         root = t;
-        return;
     }
     else {
         node *&t = leftmost(root->right);
@@ -105,13 +103,14 @@ inline void bst<T>::remove_tree(tree<T>::node *&root)
         delete t;
         t = p;
     }
+	super_root_init();
 }
 
 template<typename T>
-typename bst<T>::node *& bst<T>::leftmost(tree<T>::node * &root)
+typename bst<T>::node *& bst<T>::leftmost(tree<T>::node *const& root) const
 {
-    if (root == nullptr) return root;
-    node *&t = root;
+	if (root == nullptr) return const_cast<node*&>(root);
+	node *&t = const_cast<node*&>(root);
     while (t->left != nullptr) {
         t = t->left;
     }
@@ -119,10 +118,10 @@ typename bst<T>::node *& bst<T>::leftmost(tree<T>::node * &root)
 }
 
 template<typename T>
-typename bst<T>::node *& bst<T>::rightmost(node * &root)
+typename bst<T>::node *& bst<T>::rightmost( node *const&  root) const
 {
-    if (root == nullptr) return root;
-    node *&t = root;
+    if (root == nullptr) return const_cast<node*&>(root);
+    node *&t = const_cast<node*&>(root);
     while (t->right != nullptr) {
         t = t->right;
     }

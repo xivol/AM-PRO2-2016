@@ -61,28 +61,29 @@ public:
         iterator &operator--(int);
 
         T operator*();
+		const T *operator->();
 
         bool operator== (const iterator & it);
         bool operator!= (const iterator & it);
         friend class tree;
     };
 
-    iterator begin()
-    {
+    iterator begin() const
+	{
         return iterator(this);
     }
 
-    iterator rbegin()
+    iterator rbegin() const
     {
         return iterator(this, false);
     }
 
-    iterator end()
+    iterator end() const
     {
-        return iterator(this, &super_root);
+        return iterator(this, nullptr);
     }
 
-    iterator find(const T &x);
+    iterator find(const T &x) const;
 
     friend class tree_maker;
     template <typename P> friend class test_tree;
@@ -230,6 +231,7 @@ typename tree<T>::node *tree<T>::iterator::next_infix(node *cur)
         }
     }
     else {
+		if (parents.is_empty()) return cur;
         node *t = parents.top();
         while (cur == t->right || t == &collection->super_root) {
             cur = t;
@@ -261,6 +263,7 @@ typename tree<T>::node * tree<T>::iterator::prev_infix(node * cur)
         return cur;
     }
     else {
+		if (parents.is_empty()) return cur;
         node* t = parents.top();
         while (cur == t->left || t == &collection->super_root) {
             cur = t;
@@ -309,6 +312,12 @@ T tree<T>::iterator::operator*()
     return current->data;
 }
 
+template<typename T>
+inline const T * tree<T>::iterator::operator->()
+{
+	return &current->data;
+}
+
 template <typename T>
 bool tree<T>::iterator::operator== (const iterator & it)
 {
@@ -329,7 +338,7 @@ std::ostream &operator<<(std::ostream &os, const tree<P> &t)
 }
 
 template<typename T>
-typename tree<T>::iterator tree<T>::find(const T & x)
+typename tree<T>::iterator tree<T>::find(const T & x) const
 {
     return iterator(this, find_tree(x, root));
 }
