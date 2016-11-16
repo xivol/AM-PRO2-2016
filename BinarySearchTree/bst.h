@@ -61,11 +61,11 @@ public:
 		remove_tree(tree<T>::find_tree(root, it));
 		super_root_init();
 	}
-	iterator min()
+	iterator min() const
 	{
 		return tree<T>::make_iterator(leftmost(root));
 	}
-	iterator max() 
+	iterator max() const
 	{
 		return make_iterator(rightmost(root));
 	}

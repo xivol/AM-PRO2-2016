@@ -49,10 +49,9 @@ public:
 	}
 
 	Value top() const 
-	{
-		bst<qpair>::node * t = bst<qpair>::rightmost(tree<qpair>::root);
-		if (t == nullptr) throw std::out_of_range("");
-		return t->data.value;
+	{		
+		if (empty()) throw std::out_of_range("");
+		return max()->value;
 	}
 
 	bool empty() const 

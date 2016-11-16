@@ -28,7 +28,7 @@ protected:
     static node *find_tree(const T &x, const node *root);
 	static node *&find_tree(node *&root, const iterator &x);
     static bool equals_tree(const node *root1, const node *root2);
-    iterator make_iterator(node *t);
+    iterator make_iterator(node *t) const;
 public:
     tree() : root(nullptr) {}
     tree(const tree & t);
@@ -389,7 +389,7 @@ bool tree<T>::equals_tree(const node *root1, const node *root2)
 }
 
 template<typename T>
-inline typename tree<T>::iterator tree<T>::make_iterator(node * t)
+inline typename tree<T>::iterator tree<T>::make_iterator(node * t) const
 {
     return iterator(this, t);
 }
