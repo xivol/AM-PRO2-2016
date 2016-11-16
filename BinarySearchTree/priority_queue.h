@@ -82,13 +82,14 @@ public:
 	// Слияние двух очередей - новая очередь
 	priority_queue operator+(const priority_queue &q) const;
 
-	// Дружественная функция вывода
+	// Дружественная операция вывода
 	template <typename P, typename V>
 	friend std::ostream &operator<<(std::ostream &os, const priority_queue<P, V> &q);
 };
 
+//Операция ввода элементов в очередь
 template<typename P, typename V>
-std::istream & operator >> (std::istream & is, priority_queue<P, V>& q);
+std::istream &operator>>(std::istream & is, priority_queue<P, V>& q);
 
 template<typename P, typename V>
 inline std::ostream & operator<<(std::ostream & os, const priority_queue<P, V>& q)
