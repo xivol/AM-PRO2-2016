@@ -1,3 +1,7 @@
+//
+// Лабораторная работа №21. Абстрактные типы данных. Очередь с приоритетом
+// priority_queue.h
+//
 #pragma once
 #include "bst.h"
 
@@ -34,12 +38,12 @@ class priority_queue : protected bst<qpair<Priority, Value>>
 	   т.к. очередь не является деревом, 
 	   а лишь использует его для хранения элементов.
 	   
-	   При этом, мы не можем использовать дерево как
-	   член класса, т.к. нам нужен доступ 
+	   При этом, мы не можем использовать дерево 
+	   как член класса, т.к. нам нужен доступ 
 	   к его закрытым методам для эффективной работы с ним.
 	   
 	   Не превильная архитектура класса bst! 
-	   Класс должен позволять выполнять операции эффективно, 
+	   Класс должен позволять выполнять операции эффективно 
 	   без доступа к закрытым полям и методам.
 	*/
 protected:
@@ -65,7 +69,7 @@ public:
 	void push(const Value &v) { push(v, default); }
 	void push(const Value &v, const Priority &p);
 	
-	// Извлесение из очереди
+	// Извлечение из очереди
 	void pop();
 	
 	// Просмотр первого элемента
@@ -74,9 +78,9 @@ public:
 	// Проверка очереди на пустоту
 	bool empty() const;
 
-	// Операция ввода элемента в очередь
+	// Операция добавления элемента в очередь
 	priority_queue &operator<<(const Value &v);
-	// Операция вывода элемента из очереди
+	// Операция извлечения элемента из очереди
 	priority_queue &operator>>(Value &v);
 
 	// Слияние двух очередей - новая очередь
@@ -85,9 +89,12 @@ public:
 	// Дружественная операция вывода
 	template <typename P, typename V>
 	friend std::ostream &operator<<(std::ostream &os, const priority_queue<P, V> &q);
+	// Тестирующий класс
+	template <typename P, typename V>
+	friend class test_priority_queue<P, V>;
 };
 
-//Операция ввода элементов в очередь
+// Операция ввода элементов в очередь
 template<typename P, typename V>
 std::istream &operator>>(std::istream & is, priority_queue<P, V>& q);
 

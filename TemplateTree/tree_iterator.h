@@ -97,6 +97,7 @@ public:
 		// ѕолучение значени€ в узле дерева
 		T operator*();
 
+
 		// ќперации сравнени€ итераторов на равенство
 		bool operator== (const iterator & it);
 		bool operator!= (const iterator & it);

@@ -16,21 +16,21 @@ protected:
 
     // Вставка элемента в дерево и 
     // возвращение указателя на вставленный элемент
-    node *insert_tree(node *&root, const T &x);
+    static node *insert_tree(node *&root, const T &x);
 
     // Поиск элемента в дереве
 	// Передача значений по ссылке для использования 
 	// совместно с insert и remove.
-    node *&find_tree(node *&root, const T &x) const;
+    static node *&find_tree(node *&root, const T &x) const;
 
     // Удаление указанного элемента из дерева
-    void remove_tree(node *&root);
+    static void remove_tree(node *&root);
 
     // Получение самого левого узла в дереве
-    node *&leftmost(node *&root) const;
+    static node *&leftmost(node *&root) const;
 
     // Получение самого правого узла в дереве
-	node *&rightmost(node *&root) const;
+	static node *&rightmost(node *&root) const;
 public:	
 	// Конструктор копии
 	bst(const bst& t): tree<T>(t) {}
