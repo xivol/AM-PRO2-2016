@@ -7,11 +7,11 @@ class bst : public tree<T>
 {
 protected:
     typedef  tree<T>::node node;
-    node *insert_tree(node *&root, const T &x);
-    node *&find_tree(node *& const root, const T &x) const;
-    void remove_tree(node *&root);
-    node *&leftmost(node *const&  root) const;
-    node *&rightmost(node *const&  root) const;
+    static node *insert_tree(node *&root, const T &x);
+    static node *&find_tree(node *& const root, const T &x);
+    static void remove_tree(node *&root);
+    static node *&leftmost(node *const&  root);
+    static node *&rightmost(node *const&  root);
 public:
 	bst() {}
 	bst(const bst& t) :tree<T>(t) {}
@@ -26,7 +26,7 @@ public:
     {
         node* t = insert_tree(root, x);
         super_root_init();
-        return make_iter(t);
+        return make_iterator(t);
     }
 
     iterator find(const T &x) const
@@ -46,13 +46,29 @@ public:
             t = insert_tree(t, x);
             super_root_init();
         }
-        return make_iter(t);
+        return make_iterator(t);
     }
 
     void remove(const T &x)
     {
         remove_tree(find_tree(root, x));
+		super_root_init();
     }
+
+	void remove(iterator &it)
+	{
+		if (it == end()) return;
+		remove_tree(tree<T>::find_tree(root, it));
+		super_root_init();
+	}
+	iterator min()
+	{
+		return tree<T>::make_iterator(leftmost(root));
+	}
+	iterator max() 
+	{
+		return make_iterator(rightmost(root));
+	}
 };
 
 template<typename T>
@@ -73,7 +89,7 @@ typename bst<T>::node * bst<T>::insert_tree(node *& root, const T & x)
 
 
 template<typename T>
-typename bst<T>::node *& bst<T>::find_tree(tree<T>::node *& const root, const T & x) const
+typename bst<T>::node *& bst<T>::find_tree(tree<T>::node *& const root, const T & x)
 {
     if (root == nullptr) return root;
     if (root->data == x) return root;
@@ -103,11 +119,10 @@ inline void bst<T>::remove_tree(tree<T>::node *&root)
         delete t;
         t = p;
     }
-	super_root_init();
 }
 
 template<typename T>
-typename bst<T>::node *& bst<T>::leftmost(tree<T>::node *const& root) const
+typename bst<T>::node *& bst<T>::leftmost(node *const& root)
 {
 	if (root == nullptr) return const_cast<node*&>(root);
 	node *&t = const_cast<node*&>(root);
@@ -118,7 +133,7 @@ typename bst<T>::node *& bst<T>::leftmost(tree<T>::node *const& root) const
 }
 
 template<typename T>
-typename bst<T>::node *& bst<T>::rightmost( node *const&  root) const
+typename bst<T>::node *& bst<T>::rightmost( node *const&  root)
 {
     if (root == nullptr) return const_cast<node*&>(root);
     node *&t = const_cast<node*&>(root);

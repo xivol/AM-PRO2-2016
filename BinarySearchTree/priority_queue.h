@@ -45,7 +45,7 @@ public:
 	}
 	void pop()
 	{ 
-		bst<qpair>::remove_tree(bst<qpair>::rightmost(root));
+		remove(max());
 	}
 
 	Value top() const 

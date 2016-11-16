@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include "stack.h"
 
@@ -25,8 +26,9 @@ protected:
     static size_t depth(const node *root);
     static size_t width(const node *root, const size_t depth);
     static node *find_tree(const T &x, const node *root);
+	static node *&find_tree(node *&root, const iterator &x);
     static bool equals_tree(const node *root1, const node *root2);
-    iterator make_iter(node *t);
+    iterator make_iterator(node *t);
 public:
     tree() : root(nullptr) {}
     tree(const tree & t);
@@ -365,6 +367,16 @@ typename tree<T>::node * tree<T>::find_tree(const T & x, const node *root)
 }
 
 template<typename T>
+typename tree<T>::node *& tree<T>::find_tree(node *& root, const iterator &x)
+{
+	assert(x.current != &x.collection->super_root);
+	if (root == nullptr) return root;
+	if (root == x.current) return root;
+	if (node *&t = find_tree( root->left, x)) return t;
+	return find_tree(root->right, x);
+}
+
+template<typename T>
 bool tree<T>::equals_tree(const node *root1, const node *root2)
 {
     if (root1 == root2) return true;
@@ -377,7 +389,7 @@ bool tree<T>::equals_tree(const node *root1, const node *root2)
 }
 
 template<typename T>
-inline typename tree<T>::iterator tree<T>::make_iter(node * t)
+inline typename tree<T>::iterator tree<T>::make_iterator(node * t)
 {
     return iterator(this, t);
 }
