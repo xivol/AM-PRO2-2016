@@ -13,6 +13,15 @@ protected:
     node *&leftmost(node *&root);
     node *&rightmost(node *&root);    
 public:
+	bst() {}
+	bst(const bst& t) :tree<T>(t) {}
+
+	bst &operator=(const bst &t)
+	{
+		tree<T>::operator=(t);
+		return *this;
+	}
+
     iterator insert(const T &x)
     {
         node* t = insert_tree(root, x);

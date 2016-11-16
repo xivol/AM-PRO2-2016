@@ -158,6 +158,8 @@ tree<T> &tree<T>::operator=(const tree & t)
 {
     delete_tree(root);
     root = copy_tree(t.root);
+	super_root_init();
+	return *this;
 }
 
 template <typename T>
