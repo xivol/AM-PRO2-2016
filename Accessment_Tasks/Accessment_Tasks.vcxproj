@@ -115,6 +115,7 @@
     <ClInclude Include="point.h" />
     <ClInclude Include="room.h" />
     <ClInclude Include="rad_point.h" />
+    <ClInclude Include="tlist.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
