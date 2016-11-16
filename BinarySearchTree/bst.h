@@ -23,6 +23,13 @@ class bst : public tree<T>
     // ѕолучение самого правого узла в дереве
     node *&rightmost(node *&root);    
 public:
+	bst(const bst& t) :tree(t) {}
+
+	bst &operator=(const bst &t)
+	{
+		tree::operator=(t);
+		return *this;
+	}
 
     // ¬ставка значени€ и 
     // возвращение итератора на него

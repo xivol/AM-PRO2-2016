@@ -121,7 +121,7 @@
     <ClInclude Include="bst.h" />
     <ClInclude Include="priority_queue.h" />
     <ClInclude Include="stack.h" />
-    <ClInclude Include="tree.h" />
+    <ClInclude Include="tree_iterator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

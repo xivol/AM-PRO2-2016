@@ -21,10 +21,10 @@
     <ClInclude Include="priority_queue.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="tree.h">
+    <ClInclude Include="stack.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="stack.h">
+    <ClInclude Include="tree_iterator.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
