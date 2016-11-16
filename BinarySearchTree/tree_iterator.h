@@ -26,7 +26,7 @@ protected:
     static size_t width(const node *root, const size_t depth);
     static node *find_tree(const T &x, const node *root);
     static bool equals_tree(const node *root1, const node *root2);
-    iterator make_iter(node *t);
+    iterator make_iterator(node *t);
 public:
     tree() : root(nullptr) {}
     tree(const tree & t);
@@ -366,7 +366,7 @@ bool tree<T>::equals_tree(const node *root1, const node *root2)
 }
 
 template<typename T>
-inline typename tree<T>::iterator tree<T>::make_iter(node * t)
+inline typename tree<T>::iterator tree<T>::make_iterator(node * t)
 {
     return iterator(this, t);
 }

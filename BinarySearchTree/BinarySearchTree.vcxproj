@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="bst.h" />
+    <ClInclude Include="crtdynmem.h" />
     <ClInclude Include="priority_queue.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="tree_iterator.h" />

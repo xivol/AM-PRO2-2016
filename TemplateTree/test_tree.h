@@ -17,23 +17,6 @@ class test_tree
     // Метод получения тестовых данных
     static T *get_test_data(const size_t size);
 
-	// Рекурсивное заполнение массива индексов в инфиксном порядке
-	static void infix_index(size_t *indices, array_tree root, size_t &index_out, array_tree cur) {
-		if (cur == nullptr) return;
-		infix_index(indices, root, index_out, root->left);
-		indices[index_out++] = cur - root;
-		infix_index(indices, root->right)
-	}
-
-	// Метод получения индексов array_tree при обходе в инфиксном порядке
-	static size_t *get_infix_indices(const size_t size, array_tree root) {
-		if (size == 0) return nullptr;
-		size_t *indices = new size_t[size];
-		size_t i = 0;
-		infix_index(indices, root, i, root);
-		return indices;
-	}
-
     // Тест для copy_tree
     static bool copy_tree();
 public:
@@ -71,6 +54,7 @@ inline bool test_tree<T>::copy_tree()
         array_tree test = get_tree(test_data, i);        
         tree<T>::node *t = tree<T>::copy_tree(test);
         assert(tree<T>::equals_tree(t,test));
+		tree<T>::delete_tree(t);
         delete[] test;
         delete[] test_data;
     }
