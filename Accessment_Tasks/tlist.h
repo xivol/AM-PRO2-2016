@@ -8,6 +8,9 @@ struct tlist
 {
 	Datatype data;
 	tlist *next;
+	tlist(): next(nullptr) {}
+	tlist(const Datatype &data, tlist *next = nullptr):
+		data(data), next(next) {}
 };
 
 // Функция копирования списка.
@@ -53,13 +56,14 @@ void delete_list(tlist<T> *&begin)
 
 // Функция вывода списка на консоль.
 // Входные параметры:
-//     begin - указатель на начало списка.
+//     begin - указатель на начало списка,
+//     os - целевой поток вывода.
 template<typename T>
-void print_list(const tlist<T> *begin) 
+void print_list(const tlist<T> *begin, std::ostream &os = std::cout)
 {
 	while (begin != nullptr) {
-		cout << begin->data << ' ';
+		os << begin->data << ' ';
 		begin = begin->next;
 	}
-	cout << endl;
+	os << endl;
 }
