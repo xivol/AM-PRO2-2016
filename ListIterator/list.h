@@ -94,9 +94,15 @@ public:
 //
 
     // Получение итерартора на начало списка
-    iterator begin();
+    iterator begin()
+    {
+        return iterator(this, first);
+    }
     // Получение итератора за концом списка
-    iterator end();
+    iterator end()
+    {
+        return iterator(this, nullptr);
+    }
 
     // Поиск элемента с заданным значениемв списке
     // и возвращение итератора, указывающего на него.
