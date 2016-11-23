@@ -1,17 +1,36 @@
+//
+// Лабораторная работа №22. Стандартная библиотека шаблонов. Шаблонные функции. Работа с контейнерами
+// algorithms.h
+//
 #pragma once
+#define GET_VALUE_TYPE()
 #include <iostream>
 
+// Шаблон функции вывода
 template <typename Container>
-void print( Container &container)
+void print(Container &container)
 {
-    for (auto value : container)
+	// Проход по контейнеру.
+	// Работает по любому типу с методами:
+	// begin(), end().
+	// А также для статических массивов T[N].
+    for (const auto &value : container)
         std::cout << value << " ";
+	std::cout << std::endl;
 }
 
+// Шаблон функции вычисления минимума в промежутке
 template <typename Iterator>
 auto min_value(const Iterator &begin, const Iterator &end)
 {
-    auto min = *begin;
+	/*  Тип возвращвемого значения 
+	вычисляется автоматически на этапе компиляции.
+	Это возможно, т.к. тип значений в контейнере
+	однозначно определяет тип возвращаемого значения.
+	*/
+	auto min = *begin;
+	std::cout << typeid(min).name() << " : ";
+
     auto it = begin;
     for (++it; it != end; ++it)
         if (min > *it)
@@ -19,8 +38,20 @@ auto min_value(const Iterator &begin, const Iterator &end)
     return min;
 }
 
-template <typename Container>
-auto min_value( Container &container)
+// Шаблон функции вычисления суммы в промежутке
+template <typename Iterator, typename T = double>
+T sum_value(const Iterator &begin, const Iterator &end) 
 {
-    return min_value(container.begin(), container.end());
+	/*  Тип возвращвемого значения 
+	не может быть вычислен автоматически, т.к.
+	типа значений в контейнере может быть не достаточно для
+	хранения суммы значений.
+	*/
+	T sum = *begin;
+	std::cout << typeid(sum).name() << " : ";
+
+	auto it = begin;
+	for (++it; it != end; ++it)
+		sum += *it;
+	return sum;
 }
