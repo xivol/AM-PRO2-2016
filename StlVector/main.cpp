@@ -1,45 +1,42 @@
-#include <array>
 #include <iostream>
 #include <vector>
 
-using namespace std;
+using namespace std; 
 
-template < typename Iterator>
-auto min_value(const Iterator &begin, const Iterator& end)
-{
-	auto min = *begin;
-	cout << typeid(begin).name() << endl;
-	for (Iterator i = begin + 1; i != end; ++i)
-		if (min > *i) min = *i;
-	return min;
-}
+void fill_vector(vector<int>& v, size_t count = 0) {
+	
+	size_t cap = v.capacity();
+	cout << "\tStart" << endl;
+	cout << "Capacity: " << cap <<"\tSize: " << v.size() << endl;
+	
+	for (int i = 0; i < count; ++i) {
+		v.push_back(rand());
 
-template <typename T>
-auto min(const T&t)
-{
-	return min_value(t.begin(), t.end());
+		if (cap != v.capacity()) {
+			cap = v.capacity();					
+			cout << "Capacity: " << cap <<"\tSize: " << v.size() << endl;
+		}
+	}
+	
+	cout << "\tFinal" << endl;
+	cout << "Capacity: " << cap << "\tSize: " << v.size() << endl;
+
+	v.shrink_to_fit();
+	if (cap != v.capacity()) {
+		cap = v.capacity();
+		cout << "\tShrunk to fit!" << endl;
+		cout << "Capacity: " << cap << "\tSize: " << v.size() << endl;
+	}
 }
 
 int main() {
-	const int n = 10;
-
-	int arr[n] = { 0, 1, 2, 3, 4, 5, -1, 7, 8, 9 };
-	for (int i = 0; i < n; ++i)
-		cout << arr[i] << " ";
+	vector<int> v;
+	size_t count = 1000;
+	fill_vector(v, count);
 	cout << endl;
-	cout << min_value(begin(arr), end(arr)) << endl;
-	
-	array<int, n> a = { 0, 1, 2, 3, 4, 5, -1, 7, 8, 9 };
-	for(auto i = a.begin(); i!=a.end(); ++i)
-		cout << *i << " ";
-	cout << endl;
-	cout << min(a) << endl;
-
-	vector<int> v = { 0, 1, 2, 3, 4, 5, -1, 7, 8, 9 };
-	for (auto i = v.begin(); i != v.end(); ++i)
-		cout << *i << " ";
-	cout << endl;
-	cout << min(v) << endl;
+	v.clear();
+	v.reserve(count);
+	fill_vector(v, count);
 	system("pause");
 	return 0;
 }
