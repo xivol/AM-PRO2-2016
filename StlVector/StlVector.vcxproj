@@ -111,6 +111,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="vector_functions.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="vector.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="vector_algorithms.h" />
+    <ClInclude Include="vector_functions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

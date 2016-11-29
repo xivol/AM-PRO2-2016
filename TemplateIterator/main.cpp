@@ -26,7 +26,7 @@ int main()
     print(l);  // print<list<int>>(l);
 	cout << min_value(l.begin(), l.end()) << endl;  // min_value<list<int>::iterator>(...);
 	
-	// Тип возвращаемого значения не может быть вычислен компилятором
+	// Тип возвращаемого значения не может быть вычислен компилятором,
 	// будет использовано значение по умолчанию - double
 	cout << sum_value(l.begin(), l.end()) << endl;
 
