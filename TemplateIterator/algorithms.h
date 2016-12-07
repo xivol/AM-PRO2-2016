@@ -11,7 +11,7 @@ template <typename Container>
 void print(Container &container)
 {
 	// Проход по контейнеру.
-	// Работает по любому типу с методами:
+	// Работает для любого типа с методами:
 	// begin(), end().
 	// А также для статических массивов T[N].
     for (const auto &value : container)
