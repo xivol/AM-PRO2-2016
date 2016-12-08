@@ -44,7 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="snames.txt">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="students.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="exams.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="session.txt">
+      <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
 </Project>
