@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main() {
+int not_main() {
 	setlocale(LC_ALL, "Rus");
 	date d;
 	cin >> d.day >> d.month >> d.year;
