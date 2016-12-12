@@ -8,11 +8,7 @@ int main() {
 		for (int i = 0; i < 10; ++i)
 			list1.push_back(i);
 
-		cout << list1.size() << endl;
-
-		for (auto i : list1)
-			cout << i << " ";
-		cout << endl;
+		list1.print_use_count();
 		
 		list<int> list2;
 		list2 = list1;

@@ -203,8 +203,8 @@ void list<Datatype>::print_use_count(ostream &os = cout) const
 	shared_ptr<node> t = first;
 	size_t i = 0;
 	while (t) {
-		cout << i++ << " : " << t->data << 
-			" ссылок : " << t.use_count() << endl;
+		cout << i++ << ": " << t->data << 
+			" ссылок: " << t.use_count() << endl;
 		t = t->next;
 	}
 }
