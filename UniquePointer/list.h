@@ -13,7 +13,6 @@ class list
 		shared_ptr<node> prev, next;
 		node(const Datatype& data, shared_ptr<node> &prev, shared_ptr<node> &next);
 		node(const Datatype& data = 0);
-		~node();
 	};
 	
 	// Начало и конец списка
@@ -123,13 +122,6 @@ template<typename Datatype>
 inline list<Datatype>::node::node(const Datatype & data):
 	data(data), prev(nullptr), next(nullptr)
 {}
-
-template<typename Datatype>
-inline list<Datatype>::node::~node()
-{
-	if (next)
-		next->prev = nullptr;
-}
 
 template<typename Datatype>
 void list<Datatype>::copy_list(const shared_ptr<node> &from_first, const shared_ptr<node> &from_last)
