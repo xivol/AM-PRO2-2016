@@ -3,19 +3,37 @@
 
 int main() {
 	setlocale(LC_ALL, "Rus");
-	list<int> list;
-	for (int i = 0; i < 10; ++i)
-		list.push_back(i);
-	std::cout << list.size() << std::endl;
+	try {
+		list<int> list1;
+		for (int i = 0; i < 10; ++i)
+			list1.push_back(i);
 
-	for (auto i : list)
-		cout << i << " ";
-	cout << endl;
+		cout << list1.size() << endl;
 
-	while (!list.is_empty())
-		list.pop_back();
+		for (auto i : list1)
+			cout << i << " ";
+		cout << endl;
+		
+		list<int> list2;
+		list2 = list1;
 
-	cout << list.size() << endl;
-	_CrtDumpMemoryLeaks();
+		cout << "Копия:" << endl;
+		for (auto i : list2)
+			cout << i << " ";
+		cout << endl;
+
+		while (!list2.is_empty()) {
+			cout << list2.back() << " ";
+			list2.pop_back();
+		}
+		cout << endl;
+
+		cout << list2.size() << endl;
+	}
+	catch (const exception &e) {
+		cout << e.what() << endl;
+	}
+	_CrtDumpMemoryLeaks		();
+	system("pause");
 	return 0;
 }

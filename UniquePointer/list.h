@@ -5,21 +5,19 @@ using namespace std;
 template <typename Datatype>
 class list
 {
-	
 	// Описание узла списка
 	struct node
 	{
 		Datatype data;
 		shared_ptr<node> prev, next;
-		node(const Datatype& data, shared_ptr<node> &prev, shared_ptr<node> &next);
-		node(const Datatype& data = 0);
+		node(const Datatype& data);
 	};
 	
 	// Начало и конец списка
 	shared_ptr<node> first, last;
 
 	// Метод для копирование элементов из другого списка
-	void copy_list(const shared_ptr<node> &from_first, const shared_ptr<node> &from_last);
+	void copy_list(const shared_ptr<node> &from_first);
 
 	// Метод удаления списка
 	void delete_list();
@@ -29,16 +27,18 @@ public:
 
 	list(const list &l)
 	{
-		copy_list(l.first, l.last);
+		copy_list(l.first);
 	}
 
 	list &operator=(const list &l)
 	{
 		delete_list();
-		copy_list(l.first, l.last);
+		copy_list(l.first);
 		return *this;
 	}
-	~list() {
+
+	~list() 
+	{
 		delete_list();
 	}
 
@@ -71,8 +71,7 @@ public:
 			current(current), collection(collection)
 		{}
 
-		iterator(const list *collection) :
-			current(), collection(collection)
+		iterator(const list *collection) : collection(collection)
 		{}
 	public:
 		Datatype &operator*() {
@@ -101,6 +100,7 @@ public:
 		{
 			return !(*this == it);
 		}
+
 		friend class list;
 	};
 
@@ -114,30 +114,29 @@ public:
 };
 
 template<typename Datatype>
-inline list<Datatype>::node::node(const Datatype &data, shared_ptr<node> &prev, shared_ptr<node> &next):
-	data(data),prev(prev),next(next) 
-{}
-
-template<typename Datatype>
 inline list<Datatype>::node::node(const Datatype & data):
 	data(data), prev(nullptr), next(nullptr)
 {}
 
 template<typename Datatype>
-void list<Datatype>::copy_list(const shared_ptr<node> &from_first, const shared_ptr<node> &from_last)
+void list<Datatype>::copy_list(const shared_ptr<node> &from_first)
 {
-	if (!is_empty()) throw runtime_error("Попытка копирования в не пустой список");
-	shared_ptr<node> &to = first;
-	shared_ptr<node> from = from_first;
-	while (from) {
-		shared_ptr<node> &prev = to;
-		to = make_shared<node>(from->data);
-		to->prev = prev;
+	if (!is_empty()) throw runtime_error("Попытка копирования в не пустой список.");
+	if (!from_first) return;		
+	first = make_shared<node>(from_first->data);
+	shared_ptr<node> prev(first);
+	shared_ptr<node> from = from_first->next;
+	shared_ptr<node> to = first;
+	while (from) {		
+		to->next = make_shared<node>(from->data);		
+		if (!first)
+			first = to;
 		to = to->next;
+		to->prev = prev;
+		prev = to;		
 		from = from->next;
 	}
-	to->next = nullptr;
-	last = to;
+	last = prev;
 }
 
 template<typename Datatype>
@@ -149,6 +148,7 @@ void list<Datatype>::delete_list()
 		t->next = nullptr;
 		t->prev = nullptr;
 	}
+	last = nullptr;
 }
 
 template<typename Datatype>
@@ -165,7 +165,6 @@ void list<Datatype>::push_back(const Datatype &x)
 		last = last->next;
 	}
 	last->next = nullptr;
-	cout << last.use_count() << endl;
 }
 
 template<typename Datatype>
@@ -202,8 +201,10 @@ template<typename Datatype>
 void list<Datatype>::print_use_count(ostream &os = cout) const
 {
 	shared_ptr<node> t = first;
+	size_t i = 0;
 	while (t) {
-		cout << t->data << "\t: " << t.use_count() << endl;
+		cout << i++ << " : " << t->data << 
+			" ссылок : " << t.use_count() << endl;
 		t = t->next;
 	}
 }
