@@ -11,8 +11,9 @@ using namespace std;
 template <typename T>
 class dyn_array
 {
+	typedef unique_ptr<T[], void(*)(T*)> pointer;
 	// Данные в массиве
-	unique_ptr<T[], void(*)(T*)> data;
+	pointer data;
 	//T*data;
 	// Размер массива
 	size_t _size;
@@ -48,12 +49,14 @@ public:
 
 	// Конструктор копии
 	dyn_array(const dyn_array& d) : 
-		data(allocator(size), deleter), _size(d._size) {
+		data(allocator(d._size), deleter), _size(d._size) 
+	{
 		copy(d.data.get(), data.get(), d._size);
 	}
 
 	// Операция присваивания
-	dyn_array &operator=(const dyn_array& d) {
+	dyn_array &operator=(const dyn_array& d) 
+	{
 		if (d._size != _size) {
 			//deleter(data);
 			data.reset(allocator(d._size));
@@ -64,17 +67,20 @@ public:
 	}
 
 	// Операция доступа к элементам
-	T &operator[](size_t index) {
+	T &operator[](size_t index) 
+	{
 		return data[index];
 	}
 
 	// Операция доступа к элементам для чтения
-	const T &operator[](size_t index) const {
+	const T &operator[](size_t index) const 
+	{
 		return data[index];
 	}
 
 	// Количество элементов в массиве
-	size_t size() const {
+	size_t size() const 
+	{
 		return _size;
 	}
 
@@ -107,12 +113,9 @@ void dyn_array<T>::resize(size_t new_size)
 {
 	if (new_size == _size) return;
 	if (new_size > _size) {		
-		//T *ptr = allocator(new_size);
-		auto ptr = unique_ptr<T[], void(*)(T*)>(allocator(new_size), deleter);
+		auto ptr = pointer(allocator(new_size), deleter);
 		copy(data.get(), ptr.get(), _size);
-		//deleter(data);
 		data.swap(ptr);
-		//data = ptr;
 	}
 	_size = new_size;
 }
@@ -124,20 +127,17 @@ void dyn_array<T>::append(const T &x)
 	data[_size - 1] = x;
 }
 
-//template<typename T>
-//void dyn_array<T>::insert(size_t index, const T &x)
-//{
-//	auto ptr = unique_ptr<T[], void(*)(T*)>(allocator(_size + 1),deleter);
-//	for (int i = 0; i < index; ++i)
-//		ptr[i] = data[i];
-//	ptr[index] = x;
-//	for (int i = index; i < _size; ++i)
-//		ptr[i + 1] = data[i];
-//	deleter(data);
-//	data = ptr;
-//	_size += 1;
-//}
-//
+template<typename T>
+void dyn_array<T>::insert(size_t index, const T &x)
+{
+	auto ptr = pointer(allocator(_size + 1), deleter);
+	copy(data.get(), ptr.get(), index);	
+	ptr[index] = x;
+	copy(data.get() + index, ptr.get() + index + 1, _size - index);
+	data.swap(ptr);
+	_size += 1;
+}
+
 //template<typename T>
 //void dyn_array<T>::remove_at(size_t index)
 //{

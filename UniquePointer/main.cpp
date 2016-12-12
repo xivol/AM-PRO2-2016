@@ -1,24 +1,21 @@
-#include "dyn_array.h"
+#include "crtdynmem.h"
+#include "list.h"
 
 int main() {
 	setlocale(LC_ALL, "Rus");
-	dyn_array<int> a(10);
-	for (int i = 0; i < a.size(); ++i)
-		a[i] = i;
-	std::cout << std::endl;
+	list<int> list;
+	for (int i = 0; i < 10; ++i)
+		list.push_back(i);
+	std::cout << list.size() << std::endl;
 
-	a.append(500);
-	std::cout << std::endl;
+	for (auto i : list)
+		cout << i << " ";
+	cout << endl;
 
-	for (int i = 0; i < a.size(); ++i)
-		std::cout << a[i] << " ";
-	std::cout << std::endl;
+	while (!list.is_empty())
+		list.pop_back();
 
-	dyn_array<int> b(a);
-	std::cout << std::endl;
-
-	dyn_array<int> c;
-	c = a;
-	std::cout << std::endl;
+	cout << list.size() << endl;
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
