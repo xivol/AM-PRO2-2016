@@ -2,7 +2,7 @@
 #include "list.h"
 
 int main() {
-	setlocale(LC_ALL, "Rus");
+    setlocale(LC_ALL, "Rus");
 	try {
 		list<int> list1;
 		for (int i = 0; i < 10; ++i)
@@ -29,7 +29,7 @@ int main() {
 	catch (const exception &e) {
 		cout << e.what() << endl;
 	}
-	_CrtDumpMemoryLeaks		();
-	system("pause");
+	_CrtDumpMemoryLeaks();
+	std::system("pause");
 	return 0;
 }

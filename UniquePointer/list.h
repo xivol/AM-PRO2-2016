@@ -13,7 +13,8 @@ class list
 		node(const Datatype& data);
 	};
 	
-	// Начало и конец списка
+	// Начало и конец списка,
+    // разделяемый указатель
 	shared_ptr<node> first, last;
 
 	// Метод для копирование элементов из другого списка
@@ -43,16 +44,13 @@ public:
 	}
 
 	// Проверка списка на пустоту
-	bool is_empty() const
-	{
-		return !first && !last;
-	}
+    bool is_empty() const;
 
 	// Добавление элемента в конец
 	void push_back(const Datatype &x);
-	// Добавление элемента в конец
+	// Удаление элемента из конца
 	void pop_back();
-	//
+	// Чтение последнего элемента
 	Datatype back();
 
 	// Количество элементов в списке
@@ -63,6 +61,7 @@ public:
 
 	class iterator 
 	{
+        // Слабая ссылка на объект
 		weak_ptr<node> current;
 
 		const list *collection;
@@ -111,6 +110,17 @@ public:
 	iterator end() {
 		return iterator(this);
 	}
+
+    void insert_before(const iterator &it);
+    void insert_after(const iterator &it);
+
+    void remove(const Datatype &x);
+    void remove_at(const iterator &it);
+
+    iterator find(const Datatype &x);
+    iterator find_next(const Datatype &x, const iterator &start);
+
+    bool contains(const Datatype &x);
 };
 
 template<typename Datatype>
@@ -123,17 +133,20 @@ void list<Datatype>::copy_list(const shared_ptr<node> &from_first)
 {
 	if (!is_empty()) throw runtime_error("Попытка копирования в не пустой список.");
 	if (!from_first) return;		
+
 	first = make_shared<node>(from_first->data);
-	shared_ptr<node> prev(first);
+
+	shared_ptr<node> prev = first;
 	shared_ptr<node> from = from_first->next;
 	shared_ptr<node> to = first;
-	while (from) {		
+
+	while (from) {
 		to->next = make_shared<node>(from->data);		
 		if (!first)
 			first = to;
 		to = to->next;
 		to->prev = prev;
-		prev = to;		
+		prev = to;
 		from = from->next;
 	}
 	last = prev;
@@ -145,10 +158,20 @@ void list<Datatype>::delete_list()
 	while (first) {
 		shared_ptr<node> t = first;
 		first = first->next;
+        // Удаляем все ссылки текущего элемента
 		t->next = nullptr;
 		t->prev = nullptr;
 	}
+    // first == nullptr
 	last = nullptr;
+}
+
+template<typename Datatype>
+bool list<Datatype>::is_empty() const
+{
+    // Умные указатели могут быть 
+    // неявно преобразованы к логическому типу
+    return !first && !last;
 }
 
 template<typename Datatype>
