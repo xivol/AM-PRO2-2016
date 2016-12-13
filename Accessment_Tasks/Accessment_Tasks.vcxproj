@@ -120,6 +120,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stud_file_gen.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="exams.txt" />
+    <Text Include="session.txt" />
+    <Text Include="snames.txt" />
+    <Text Include="students.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
