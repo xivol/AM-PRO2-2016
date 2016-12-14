@@ -45,7 +45,7 @@ public:
 	}
 	void pop()
 	{ 
-		remove(max());
+		remove_at(max());
 	}
 
 	Value top() const 

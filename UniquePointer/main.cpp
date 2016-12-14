@@ -1,8 +1,25 @@
 #include "crtdynmem.h"
 #include "list.h"
+#include "tree.h"
 
 int main() {
 	setlocale(LC_ALL, "Rus");
+	try {
+		tree<int> tree1;
+		for (int i = 0; i < 10; ++i)
+			tree1.push(rand() % 100);
+		tree1.print();
+
+		tree<int> tree2;
+		tree2.push(1);
+		tree2 = tree1;
+
+		tree2.print();
+	}
+	catch (const exception &e) {
+		cout << e.what() << endl;
+	}
+	_CrtDumpMemoryLeaks();
 	try {
 		list<int> list1;
 		for (int i = 0; i < 10; ++i)

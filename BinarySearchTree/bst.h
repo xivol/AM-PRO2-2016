@@ -1,3 +1,4 @@
+#include "..\SmartTree\bst.h"
 #pragma once
 #include "tree.h"
 
@@ -22,7 +23,7 @@ public:
 		return *this;
 	}
 
-    iterator insert(const T &x)
+	iterator insert(const T &x)
     {
         node* t = insert_tree(root, x);
         super_root_init();
@@ -55,7 +56,7 @@ public:
 		super_root_init();
     }
 
-	void remove(iterator &it)
+	void remove_at(iterator &it)
 	{
 		if (it == end()) return;
 		remove_tree(tree<T>::find_tree(root, it));
