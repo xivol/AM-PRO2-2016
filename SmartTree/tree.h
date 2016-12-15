@@ -33,13 +33,12 @@ public:
 	tree() : root(nullptr) {}
 	
 	// Конструктор копирования
-	tree(const tree & t)
-	{
-		root = copy_tree(t.root);
-	}
+	tree(const tree & t) : root( copy_tree(t.root) )
+	{}
 	
 	// Операция присваивания
-	tree &operator=(const tree & t) {
+	tree &operator=(const tree & t) 
+	{
 		root = nullptr;
 		root = copy_tree(t.root);
 		return *this;
@@ -71,9 +70,6 @@ public:
 	bool operator==(const tree<T> &t) const;
 	// Операция сравнения деревьев на неравенство
 	bool operator!=(const tree<T> &t) const;
-
-	// Класс для создания двоичных деревьев
-	friend class tree_maker;
 
 	// Тестирующий класс
 	template <typename P> friend class test_tree;
