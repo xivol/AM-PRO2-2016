@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
 #include <memory>
+
 using namespace std;
+
 // Шаблон класса двоичное дерево
 template <typename T>
 class tree
@@ -72,11 +74,6 @@ public:
 	// Операция сравнения деревьев на неравенство
 	bool operator!=(const tree<T> &t) const;
 
-	// Класс для создания двоичных деревьев
-	friend class tree_maker;
-
-	// Тестирующий класс
-	template <typename P> friend class test_tree;
 };
 
 
