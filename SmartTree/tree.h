@@ -1,9 +1,7 @@
 #pragma once
 #include <iostream>
 #include <memory>
-
 using namespace std;
-
 // Шаблон класса двоичное дерево
 template <typename T>
 class tree
@@ -35,13 +33,12 @@ public:
 	tree() : root(nullptr) {}
 	
 	// Конструктор копирования
-	tree(const tree & t)
-	{
-		root = copy_tree(t.root);
-	}
+	tree(const tree & t) : root( copy_tree(t.root) )
+	{}
 	
 	// Операция присваивания
-	tree &operator=(const tree & t) {
+	tree &operator=(const tree & t) 
+	{
 		root = nullptr;
 		root = copy_tree(t.root);
 		return *this;
@@ -74,6 +71,8 @@ public:
 	// Операция сравнения деревьев на неравенство
 	bool operator!=(const tree<T> &t) const;
 
+	// Тестирующий класс
+	template <typename P> friend class test_tree;
 };
 
 
