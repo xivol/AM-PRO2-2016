@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Polymorph", "Polymorph\Polymorph.vcxproj", "{7A2E44FE-2E11-410A-9DC8-50F1A3C9290A}"
 EndProject
@@ -53,6 +53,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmartTree", "SmartTree\SmartTree.vcxproj", "{3C28912B-2E4C-4097-98FF-A6EAD65ADBEB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapSet", "MapSet\MapSet.vcxproj", "{CA76BFFD-F935-42AF-8530-DD45DD3ACDA8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Functors", "Functors\Functors.vcxproj", "{3C312DC1-7B83-4034-9E64-3FB46300035E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -432,6 +434,22 @@ Global
 		{CA76BFFD-F935-42AF-8530-DD45DD3ACDA8}.Release|x64.Build.0 = Release|x64
 		{CA76BFFD-F935-42AF-8530-DD45DD3ACDA8}.Release|x86.ActiveCfg = Release|Win32
 		{CA76BFFD-F935-42AF-8530-DD45DD3ACDA8}.Release|x86.Build.0 = Release|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|Win32.Build.0 = Debug|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|x64.ActiveCfg = Debug|x64
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|x64.Build.0 = Debug|x64
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|x86.ActiveCfg = Debug|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Debug|x86.Build.0 = Debug|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|Win32.ActiveCfg = Release|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|Win32.Build.0 = Release|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|x64.ActiveCfg = Release|x64
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|x64.Build.0 = Release|x64
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|x86.ActiveCfg = Release|Win32
+		{3C312DC1-7B83-4034-9E64-3FB46300035E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -44,7 +44,7 @@ int main()
         // Приведём слово к нижнему регистру
         transform(word.begin(), word.end(), word.begin(), tolower);
         // Удалим знаки препинания из конца слова
-        if (delim.find(word[word.length()-1]) != string::npos) {
+        if (ex.find(word[word.length()-1]) != ex.end()) {
             word.erase(word.length()-1);
         }
         words[word] += 1;
