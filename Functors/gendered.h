@@ -7,7 +7,7 @@ enum class gender { Male, Female, Unrecognised };
 // Функтор - предикат сравнения с полом
 class is_gender
 {
-    // Искомый пол
+	// Искомый пол
 	gender target;
 
     // Вычисление пола по ФИО
