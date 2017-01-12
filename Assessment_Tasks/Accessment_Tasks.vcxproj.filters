@@ -27,10 +27,33 @@
     <ClInclude Include="rad_point.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="tlist.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="tree.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="stud_file_gen.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="snames.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="students.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="exams.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="session.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>
